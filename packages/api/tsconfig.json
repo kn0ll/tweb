@@ -4,7 +4,8 @@
     "noUncheckedIndexedAccess": true,
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "target": "ESNext"
+    "target": "ESNext",
+    "outDir": "dist"
   },
   "exclude": ["node_modules"],
   "include": ["src"]
