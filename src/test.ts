@@ -18,11 +18,11 @@ const NodeSdkLive = NodeSdk.layer(() => ({
 
 const program = pipe(
   Effect.log("Hello"),
-  Effect.withSpan("c"),
-  Effect.withSpan("b"),
-  Effect.withSpan("a"),
-  Effect.repeatN(50),
-  Effect.annotateSpans("working", true),
+  Effect.withSpan("d"),
+  // Effect.withSpan("b"),
+  // Effect.withSpan("a"),
+  // Effect.repeatN(50),
+  // Effect.annotateSpans("working", true),
 );
 
 pipe(
