@@ -3,14 +3,24 @@
   "private": true,
   "version": "1.0.0",
   "devDependencies": {
+    "@effect/opentelemetry": "^0.23.0",
+    "@opentelemetry/api": "^1.6",
+    "@opentelemetry/exporter-prometheus": "^0.45.1",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.34.0",
+    "@opentelemetry/resources": "^1.17",
+    "@opentelemetry/sdk-metrics": "^1.17",
+    "@opentelemetry/sdk-trace-base": "^1.17",
+    "@opentelemetry/sdk-trace-node": "^1.17",
+    "@opentelemetry/sdk-trace-web": "^1.17",
+    "@opentelemetry/semantic-conventions": "^1.17",
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "@typescript-eslint/parser": "^5.27.0",
-    "eslint": "^8.6.0",
-    "eslint-config-next": "^12.0.8",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-simple-import-sort": "^7.0.0",
-    "prettier": "^2.6.2",
-    "typescript": "^4.7.2"
+    "effect": "2.0.0-next.55",
+    "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.2.2"
   }
 }
