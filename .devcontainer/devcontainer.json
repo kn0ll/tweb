@@ -2,8 +2,9 @@
   "name": "Dev",
   "dockerComposeFile": "../docker-compose.yml",
   "service": "dev",
-  "runServices": ["jaeger"],
+  "runServices": ["telemetry", "db"],
   "workspaceFolder": "/opt/dev",
+  "postCreateCommand": "pnpm install --frozen-lockfile",
   "customizations": {
     "vscode": {
       "extensions": [

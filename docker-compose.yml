@@ -1,6 +1,7 @@
 version: "3.8"
 
 services:
+
   dev:
     build:
       context: .
@@ -12,10 +13,25 @@ services:
     user: node
     volumes:
       - ./:${DEVCONTAINER_WORKDIR}
-  jaeger:
+
+  telemetry:
     image: jaegertracing/all-in-one:latest
     ports:
       - "16686:16686"
       - "4318:4318"
     environment:
       - LOG_LEVEL=debug
+
+  db:
+    image: postgres:13.1
+    environment:
+      POSTGRES_USER: ${PGUSER}
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+      POSTGRES_DB: ${PGDATABASE}
+    ports:
+      - 5432:5432
+    volumes:
+      - db-volume:/var/lib/postgresql/data
+
+volumes:
+  db-volume:

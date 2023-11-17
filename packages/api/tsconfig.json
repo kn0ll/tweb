@@ -5,7 +5,7 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "target": "ESNext",
-    "outDir": "dist"
+    "outDir": "lib"
   },
   "exclude": ["node_modules"],
   "include": ["src"]

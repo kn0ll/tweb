@@ -10,7 +10,7 @@ export const Config = EffectConfig.all({
   ),
   exportUrl: pipe(
     EffectConfig.string("TELEMETRY_SPAN_PROCESSOR_URL"),
-    EffectConfig.withDefault("http://jaeger:4318/v1/traces"),
+    EffectConfig.withDefault("http://telemetry:4318/v1/traces"),
   ),
 });
 
