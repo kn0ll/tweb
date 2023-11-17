@@ -19,5 +19,3 @@ services:
       - "4318:4318"
     environment:
       - LOG_LEVEL=debug
-    networks:
-      - jaeger-example

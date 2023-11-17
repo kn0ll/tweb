@@ -2,10 +2,15 @@
   "name": "Dev",
   "dockerComposeFile": "../docker-compose.yml",
   "service": "dev",
+  "runServices": ["jaeger"],
   "workspaceFolder": "/opt/dev",
-  "extensions": [
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
-    "GitHub.copilot"
-  ]
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "GitHub.copilot"
+      ]
+    }
+  }
 }

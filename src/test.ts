@@ -11,8 +11,8 @@ const NodeSdkLive = NodeSdk.layer(() => ({
   },
   spanProcessor: new BatchSpanProcessor(
     new OTLPTraceExporter({
-      url: "http://localhost:4318/v1/traces",
-    })
+      url: "http://jaeger:4318/v1/traces",
+    }),
   ),
 }));
 
@@ -22,12 +22,12 @@ const program = pipe(
   Effect.withSpan("b"),
   Effect.withSpan("a"),
   Effect.repeatN(50),
-  Effect.annotateSpans("working", true)
+  Effect.annotateSpans("working", true),
 );
 
 pipe(
   Effect.delay(program, seconds(1)),
   Effect.provide(NodeSdkLive),
   Effect.catchAllCause(Effect.logError),
-  Effect.runFork
+  Effect.runFork,
 );
