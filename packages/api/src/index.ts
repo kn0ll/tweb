@@ -1,9 +1,11 @@
-import { PrismaClient } from "@rpphub/db";
 import { Effect, pipe } from "effect";
 
+import * as DB from "./DB";
 import * as Runtime from "./Runtime";
 
-const prisma = new PrismaClient();
+// const prisma: PrismaClient = new PrismaClient();
+
+// console.log(prisma);
 
 // console.log("foo is", prisma);
 
@@ -22,12 +24,28 @@ const prisma = new PrismaClient();
 // foo();
 
 const main = pipe(
-  Effect.log("Hello"),
-  Effect.withSpan("d"),
-  Effect.withSpan("b"),
-  Effect.withSpan("rrrrrr"),
-  Effect.repeatN(5),
-  Effect.annotateSpans("working", true),
+  DB.resource,
+  Effect.flatMap((db) =>
+    pipe(
+      DB.query(db.user.findMany)(),
+      Effect.flatMap((users) =>
+        pipe(
+          Effect.log("Hello"),
+          Effect.withSpan("d"),
+          Effect.withSpan("b"),
+          Effect.withSpan("rrrrrr"),
+          Effect.repeatN(5),
+          Effect.annotateSpans("working", true),
+        ),
+      ),
+    ),
+  ),
+  Effect.scoped,
 );
+
+/*
+TODO:
+make a resource, for a service, for the db.
+*/
 
 Runtime.run(main);

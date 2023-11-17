@@ -10,7 +10,6 @@ services:
         workdir: ${DEVCONTAINER_WORKDIR}
     working_dir: ${DEVCONTAINER_WORKDIR}
     tty: true
-    user: node
     volumes:
       - ./:${DEVCONTAINER_WORKDIR}
 
@@ -25,9 +24,9 @@ services:
   db:
     image: postgres:13.1
     environment:
-      POSTGRES_USER: ${PGUSER}
-      POSTGRES_PASSWORD: ${PGPASSWORD}
-      POSTGRES_DB: ${PGDATABASE}
+      POSTGRES_USER: ${DBUSER}
+      POSTGRES_PASSWORD: ${DBPASSWORD}
+      POSTGRES_DB: ${DBDATABASE}
     ports:
       - 5432:5432
     volumes:

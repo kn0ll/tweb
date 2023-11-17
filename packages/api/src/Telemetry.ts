@@ -3,7 +3,7 @@ import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
 import { BatchSpanProcessor } from "@opentelemetry/sdk-trace-base";
 import { Config as EffectConfig, Effect, pipe } from "effect";
 
-export const Config = EffectConfig.all({
+export const config = EffectConfig.all({
   serviceName: pipe(
     EffectConfig.string("TELEMETRY_RESOURCE_SERVICE_NAME"),
     EffectConfig.withDefault("default"),
@@ -16,7 +16,7 @@ export const Config = EffectConfig.all({
 
 export const provide = <R, E, A>(self: Effect.Effect<R, E, A>) =>
   pipe(
-    Effect.config(Config),
+    Effect.config(config),
     Effect.flatMap((config) =>
       Effect.provide(
         self,
