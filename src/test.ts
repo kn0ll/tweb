@@ -1,33 +1,14 @@
-import * as NodeSdk from "@effect/opentelemetry/NodeSdk";
-import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
-import { BatchSpanProcessor } from "@opentelemetry/sdk-trace-base";
-import { seconds } from "effect/Duration";
-import * as Effect from "effect/Effect";
-import { pipe } from "effect/Function";
+import { Effect, pipe } from "effect";
 
-const NodeSdkLive = NodeSdk.layer(() => ({
-  resource: {
-    serviceName: "example",
-  },
-  spanProcessor: new BatchSpanProcessor(
-    new OTLPTraceExporter({
-      url: "http://jaeger:4318/v1/traces",
-    }),
-  ),
-}));
+import * as Runtime from "./Runtime";
 
-const program = pipe(
+const main = pipe(
   Effect.log("Hello"),
   Effect.withSpan("d"),
-  // Effect.withSpan("b"),
-  // Effect.withSpan("a"),
-  // Effect.repeatN(50),
-  // Effect.annotateSpans("working", true),
+  Effect.withSpan("b"),
+  Effect.withSpan("rrrrrr"),
+  Effect.repeatN(5),
+  Effect.annotateSpans("working", true),
 );
 
-pipe(
-  Effect.delay(program, seconds(1)),
-  Effect.provide(NodeSdkLive),
-  Effect.catchAllCause(Effect.logError),
-  Effect.runFork,
-);
+Runtime.run(main);
