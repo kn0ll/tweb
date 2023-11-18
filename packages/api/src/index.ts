@@ -17,3 +17,7 @@ const main = pipe(
 );
 
 Runtime.run(main);
+
+// import { Effect } from "effect";
+// import * as Client from "./Client.js";
+// Effect.runPromise(Client.make().currentTime).then(console.log);
