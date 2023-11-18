@@ -3,6 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "bin": {
+    "serve": "lib/src/bin/server.js"
+  },
   "devDependencies": {
     "@types/node": "^20.9.1",
     "tsx": "^4.1.2",
