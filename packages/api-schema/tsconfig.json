@@ -5,10 +5,5 @@
     "outDir": "lib"
   },
   "exclude": ["node_modules"],
-  "include": ["src"],
-  "references": [
-    { "path": "../api-schema" },
-    { "path": "../db" },
-    { "path": "../telemetry" }
-  ]
+  "include": ["src"]
 }

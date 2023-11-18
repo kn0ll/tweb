@@ -1,7 +1,6 @@
 import * as DB from "@rpphub/db";
+import * as Telemetry from "@rpphub/telemetry";
 import { Effect, pipe } from "effect";
-
-import * as Runtime from "./Runtime.js";
 
 const print = pipe(Effect.log("Hello"), Effect.withSpan("print"));
 
@@ -16,7 +15,15 @@ const main = pipe(
   Effect.withSpan("main"),
 );
 
-Runtime.run(main);
+const run = <E, A>(self: Effect.Effect<never, E, A>) =>
+  pipe(
+    self,
+    Telemetry.provide(Telemetry.NodeSdk.layer),
+    Effect.catchAllCause(Effect.logError),
+    Effect.runFork,
+  );
+
+run(main);
 
 // import { Effect } from "effect";
 // import * as Client from "./Client.js";
