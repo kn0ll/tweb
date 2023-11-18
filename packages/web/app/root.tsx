@@ -1,23 +1,41 @@
 import type { LinksFunction } from "@remix-run/node";
 
 import { cssBundleHref } from "@remix-run/css-bundle";
+import { json } from "@remix-run/node";
 import {
   Form,
+  Link,
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
+import { Effect, pipe } from "effect";
 import * as React from "react";
 
+import { client } from "./client";
 import { root } from "./root.css";
 
 export const links: LinksFunction = () =>
   cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : [];
 
+export const loader = async () => {
+  const currentTime = await pipe(
+    client.currentTime,
+    // Effect.flatMap(Console.log),
+    Effect.runPromise,
+  );
+  return json({ currentTime });
+};
+
 export default function App() {
+  const { currentTime } = useLoaderData();
+
+  console.log("xxx", currentTime);
+
   return (
     <html lang="en">
       <head>
@@ -47,10 +65,10 @@ export default function App() {
           <nav>
             <ul>
               <li>
-                <a href={`/contacts/1`}>Your Name</a>
+                <Link to={`/contacts/1`}>Your Name</Link>
               </li>
               <li>
-                <a href={`/contacts/2`}>Your Friend</a>
+                <Link to={`/contacts/2`}>Your Friend</Link>
               </li>
             </ul>
           </nav>

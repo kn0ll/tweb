@@ -125,7 +125,6 @@ importers:
       '@remix-run/react': ^2.3.0
       '@remix-run/serve': ^2.3.0
       '@rpphub/api-schema': ^1.0.0
-      '@rpphub/db': ^1.0.0
       '@rpphub/telemetry': ^1.0.0
       '@types/react': ^18.2.37
       '@types/react-dom': ^18.2.15
@@ -155,7 +154,6 @@ importers:
       '@remix-run/dev': 2.3.0_tlvh6yx47qehbp2ekbynktiyfu
       '@remix-run/eslint-config': 2.3.0_elscdlrdq5uuqto35hku5v4udq
       '@rpphub/api-schema': link:../api-schema
-      '@rpphub/db': link:../db
       '@rpphub/telemetry': link:../telemetry
       '@types/react': 18.2.37
       '@types/react-dom': 18.2.15

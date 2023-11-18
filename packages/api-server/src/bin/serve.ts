@@ -1,4 +1,4 @@
-import { runMain } from "@effect/platform-node/Runtime";
+import { Runtime } from "@effect/platform-node";
 import * as Telemetry from "@rpphub/telemetry";
 import { Console, Effect, pipe } from "effect";
 
@@ -10,5 +10,5 @@ pipe(
   Effect.provide(Server.layer),
   Effect.tapErrorCause(Effect.logError),
   Telemetry.provide(Telemetry.NodeSdk.layer),
-  runMain,
+  Runtime.runMain,
 );

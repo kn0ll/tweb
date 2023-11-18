@@ -1,9 +1,8 @@
 import * as Http from "@effect/platform/HttpClient";
 import * as Client from "@effect/rpc-http/Client";
 import * as Schema from "@rpphub/api-schema";
-import { Console, Effect } from "effect";
 
-const client = Client.make(
+export const client = Client.make(
   Schema.make,
   Http.client
     .fetch()
@@ -13,5 +12,3 @@ const client = Client.make(
       ),
     ),
 );
-
-client.currentTime.pipe(Effect.flatMap(Console.log), Effect.runFork);
