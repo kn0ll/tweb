@@ -1,3 +1,6 @@
+import type { LinksFunction } from "@remix-run/node";
+
+import { cssBundleHref } from "@remix-run/css-bundle";
 import {
   Form,
   Links,
@@ -7,6 +10,11 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import * as React from "react";
+
+import { root } from "./root.css";
+
+export const links: LinksFunction = () =>
+  cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : [];
 
 export default function App() {
   return (
@@ -18,7 +26,7 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <div id="sidebar">
+        <div id="sidebar" className={root}>
           <h1>Remix Contacts</h1>
           <div>
             <Form id="search-form" role="search">
@@ -46,7 +54,6 @@ export default function App() {
             </ul>
           </nav>
         </div>
-
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
