@@ -4,20 +4,31 @@ import type { Layer } from "effect";
 import { NodeSdk } from "@effect/opentelemetry";
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
 import { BatchSpanProcessor } from "@opentelemetry/sdk-trace-base";
-import { Config, Effect, pipe } from "effect";
-
-export const config = Config.all({
-  serviceName: pipe(
-    Config.string("TELEMETRY_RESOURCE_SERVICE_NAME"),
-    Config.withDefault("default"),
-  ),
-  exportUrl: pipe(
-    Config.string("TELEMETRY_SPAN_PROCESSOR_URL"),
-    Config.withDefault("http://telemetry:4318/v1/traces"),
-  ),
-});
+import { Config, Effect, identity, pipe } from "effect";
 
 export { NodeSdk };
+
+export const resource = pipe(
+  Effect.config(
+    pipe(
+      Config.string("TELEMETRY_RESOURCE_SERVICE_NAME"),
+      Config.withDefault("default"),
+    ),
+  ),
+  Effect.map((serviceName) => ({ serviceName })),
+);
+
+export const spanExporter = pipe(
+  Effect.config(
+    pipe(
+      Config.string("TELEMETRY_SPAN_PROCESSOR_URL"),
+      Config.withDefault("http://telemetry:4318/v1/traces"),
+    ),
+  ),
+  Effect.flatMap((url) => Effect.sync(() => new OTLPTraceExporter({ url }))),
+  Effect.cached,
+  Effect.flatMap(identity),
+);
 
 export const provide =
   (
@@ -27,15 +38,13 @@ export const provide =
   ) =>
   <R, E, A>(self: Effect.Effect<R, E, A>) =>
     pipe(
-      Effect.config(config),
-      Effect.flatMap((config) =>
+      Effect.all({ exporter: spanExporter, resource }),
+      Effect.flatMap(({ resource, exporter }) =>
         Effect.provide(
           self,
           layer(() => ({
-            resource: { serviceName: config.serviceName },
-            spanProcessor: new BatchSpanProcessor(
-              new OTLPTraceExporter({ url: config.exportUrl }),
-            ),
+            resource,
+            spanProcessor: new BatchSpanProcessor(exporter),
           })),
         ),
       ),
