@@ -6,6 +6,11 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "target": "ESNext",
-    "declaration": true
-  }
+    "declaration": true,
+    "noEmitOnError": true
+  },
+  "references": [
+    { "path": "./packages/api" },
+    { "path": "./packages/telemetry" }
+  ]
 }
