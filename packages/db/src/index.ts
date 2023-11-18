@@ -1,5 +1,6 @@
-import { PrismaClient } from "@rpphub/db/client";
 import { Effect, pipe } from "effect";
+
+import { PrismaClient } from "./client/index.js";
 
 export const resource = Effect.acquireRelease(
   pipe(

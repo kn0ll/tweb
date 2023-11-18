@@ -2,6 +2,9 @@
   "name": "@rpphub/dev",
   "private": true,
   "version": "1.0.0",
+  "scripts": {
+    "build": "pnpm --filter @rpphub/db build && pnpm tsc -b"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",

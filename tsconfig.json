@@ -11,6 +11,7 @@
   },
   "references": [
     { "path": "./packages/api" },
+    { "path": "./packages/db" },
     { "path": "./packages/telemetry" }
   ]
 }
