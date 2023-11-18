@@ -24,7 +24,3 @@ const run = <E, A>(self: Effect.Effect<never, E, A>) =>
   );
 
 run(main);
-
-// import { Effect } from "effect";
-// import * as Client from "./Client.js";
-// Effect.runPromise(Client.make().currentTime).then(console.log);

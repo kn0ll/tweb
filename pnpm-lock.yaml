@@ -115,12 +115,16 @@ importers:
 
   packages/web:
     specifiers:
+      '@effect/platform': ^0.30.5
+      '@effect/rpc-http': ^0.18.1
+      '@effect/schema': ^0.48.4
       '@remix-run/css-bundle': ^2.3.0
       '@remix-run/dev': ^2
       '@remix-run/eslint-config': ^2
       '@remix-run/node': ^2.3.0
       '@remix-run/react': ^2.3.0
       '@remix-run/serve': ^2.3.0
+      '@rpphub/api-schema': ^1.0.0
       '@rpphub/db': ^1.0.0
       '@rpphub/telemetry': ^1.0.0
       '@types/react': ^18.2.37
@@ -128,23 +132,29 @@ importers:
       '@vanilla-extract/css': ^1.14.0
       effect: 2.0.0-next.55
       eslint: ^8.53.0
+      fast-check: ^3.13.2
       isbot: latest
       react: ^18.2.0
       react-dom: ^18.2.0
       tsx: ^4.1.2
       typescript: ^5.2.2
     dependencies:
+      '@effect/platform': 0.30.5_4vgu5ok2jnv3ld3c7qowfmlame
+      '@effect/rpc-http': 0.18.1_b6xqkgcu766qsmupkeids47d5e
+      '@effect/schema': 0.48.4_tlu67fmnuvvh7ffprvbrclp5ea
       '@remix-run/css-bundle': 2.3.0
       '@remix-run/node': 2.3.0_typescript@5.2.2
       '@remix-run/react': 2.3.0_vegmnuvoswdxuttpuhvewcem44
       '@remix-run/serve': 2.3.0_typescript@5.2.2
       effect: 2.0.0-next.55
+      fast-check: 3.13.2
       isbot: 3.7.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     devDependencies:
       '@remix-run/dev': 2.3.0_tlvh6yx47qehbp2ekbynktiyfu
       '@remix-run/eslint-config': 2.3.0_elscdlrdq5uuqto35hku5v4udq
+      '@rpphub/api-schema': link:../api-schema
       '@rpphub/db': link:../db
       '@rpphub/telemetry': link:../telemetry
       '@types/react': 18.2.37
