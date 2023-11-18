@@ -9,7 +9,10 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@effect/platform": "^0.30.5",
+    "@effect/platform-node": "^0.31.8",
     "@effect/rpc": "^0.18.1",
+    "@effect/rpc-http": "^0.18.1",
     "@effect/schema": "^0.48.4",
     "@rpphub/db": "^1.0.0",
     "@rpphub/telemetry": "^1.0.0",
