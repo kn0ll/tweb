@@ -16,25 +16,22 @@ import {
 import { Effect, pipe } from "effect";
 import * as React from "react";
 
-import { client } from "./client";
-import { root } from "./root.css";
+import { client } from "./client.js";
+import { root } from "./root.css.js";
 
 export const links: LinksFunction = () =>
   cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : [];
 
-export const loader = async () => {
-  const currentTime = await pipe(
+export const loader = () =>
+  pipe(
     client.currentTime,
-    // Effect.flatMap(Console.log),
+    Effect.map((currentTime) => ({ currentTime })),
+    Effect.flatMap((props) => Effect.sync(() => json(props))),
     Effect.runPromise,
   );
-  return json({ currentTime });
-};
 
 export default function App() {
-  const { currentTime } = useLoaderData();
-
-  console.log("xxx", currentTime);
+  const { currentTime } = useLoaderData<typeof loader>();
 
   return (
     <html lang="en">
@@ -46,7 +43,7 @@ export default function App() {
       </head>
       <body>
         <div id="sidebar" className={root}>
-          <h1>Remix Contacts</h1>
+          <h1>Remix Contacts {currentTime}</h1>
           <div>
             <Form id="search-form" role="search">
               <input
