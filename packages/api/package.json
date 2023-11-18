@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "bin": {
-    "serve": "lib/src/bin/server.js"
+    "serve": "lib/src/bin/serve.js"
   },
   "devDependencies": {
     "@types/node": "^20.9.1",
