@@ -1,6 +1,7 @@
-import type { NodeSdk, Resource } from "@effect/opentelemetry";
+import type { Resource } from "@effect/opentelemetry";
 import type { Layer } from "effect";
 
+import { NodeSdk } from "@effect/opentelemetry";
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
 import { BatchSpanProcessor } from "@opentelemetry/sdk-trace-base";
 import { Config, Effect, pipe } from "effect";
@@ -15,6 +16,8 @@ export const config = Config.all({
     Config.withDefault("http://telemetry:4318/v1/traces"),
   ),
 });
+
+export { NodeSdk };
 
 export const provide =
   (

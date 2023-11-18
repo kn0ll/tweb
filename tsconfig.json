@@ -9,6 +9,7 @@
     "declaration": true,
     "noEmitOnError": true
   },
+  "files": [],
   "references": [
     { "path": "./packages/api" },
     { "path": "./packages/db" },
