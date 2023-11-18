@@ -22,7 +22,19 @@ importers:
       prettier: 3.1.0
       typescript: 5.2.2
 
-  packages/api:
+  packages/api-schema:
+    specifiers:
+      '@effect/rpc': ^0.18.1
+      '@effect/schema': ^0.48.4
+      effect: 2.0.0-next.55
+      fast-check: ^3.13.2
+    dependencies:
+      '@effect/rpc': 0.18.1_4vgu5ok2jnv3ld3c7qowfmlame
+      '@effect/schema': 0.48.4_tlu67fmnuvvh7ffprvbrclp5ea
+      effect: 2.0.0-next.55
+      fast-check: 3.13.2
+
+  packages/api-server:
     specifiers:
       '@effect/platform': ^0.30.5
       '@effect/platform-node': ^0.31.8
@@ -52,18 +64,6 @@ importers:
       '@types/node': 20.9.1
       tsx: 4.1.3
       typescript: 5.2.2
-
-  packages/api-schema:
-    specifiers:
-      '@effect/rpc': ^0.18.1
-      '@effect/schema': ^0.48.4
-      effect: 2.0.0-next.55
-      fast-check: ^3.13.2
-    dependencies:
-      '@effect/rpc': 0.18.1_4vgu5ok2jnv3ld3c7qowfmlame
-      '@effect/schema': 0.48.4_tlu67fmnuvvh7ffprvbrclp5ea
-      effect: 2.0.0-next.55
-      fast-check: 3.13.2
 
   packages/db:
     specifiers:

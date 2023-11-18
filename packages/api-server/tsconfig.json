@@ -5,7 +5,7 @@
     "outDir": "lib"
   },
   "exclude": ["node_modules"],
-  "include": ["src"],
+  "include": ["bin", "src"],
   "references": [
     { "path": "../api-schema" },
     { "path": "../db" },

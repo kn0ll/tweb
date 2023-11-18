@@ -16,4 +16,4 @@ export const layer = HttpServer.server.layer(createServer, {
   port: 3000,
 });
 
-// export type { Platform } from "@effect/platform/Http/Platform";
+export type { Platform } from "@effect/platform/Http/Platform";

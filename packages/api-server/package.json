@@ -1,10 +1,13 @@
 {
-  "name": "@rpphub/api",
+  "name": "@rpphub/api-server",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "bin": {
-    "serve": "lib/src/bin/serve.js"
+    "rpphub-api-server": "lib/src/bin/serve.js"
+  },
+  "scripts": {
+    "serve": "tsx src/bin/serve"
   },
   "devDependencies": {
     "@types/node": "^20.9.1",
