@@ -14,6 +14,7 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import { Effect, pipe } from "effect";
+import { constant, flow } from "effect/Function";
 import * as React from "react";
 
 import { client } from "./client.js";
@@ -25,13 +26,12 @@ export const links: LinksFunction = () =>
 export const loader = () =>
   pipe(
     client.currentTime,
-    Effect.map((currentTime) => ({ currentTime })),
-    Effect.flatMap((props) => Effect.sync(() => json(props))),
+    Effect.flatMap(flow(json, constant, Effect.sync)),
     Effect.runPromise,
   );
 
 export default function App() {
-  const { currentTime } = useLoaderData<typeof loader>();
+  const currentTime = useLoaderData<typeof loader>();
 
   return (
     <html lang="en">
@@ -42,6 +42,18 @@ export default function App() {
         <Links />
       </head>
       <body>
+        <header>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/log-in">Log In</Link>
+              </li>
+              <li>
+                <Link to="/sign-up">Sign Up</Link>
+              </li>
+            </ul>
+          </nav>
+        </header>
         <div id="sidebar" className={root}>
           <h1>Remix Contacts {currentTime}</h1>
           <div>
