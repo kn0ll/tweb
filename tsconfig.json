@@ -9,11 +9,5 @@
     "declaration": true,
     "noEmitOnError": true
   },
-  "files": [],
-  "references": [
-    { "path": "./packages/api-schema" },
-    { "path": "./packages/api-server" },
-    { "path": "./packages/db" },
-    { "path": "./packages/telemetry" }
-  ]
+  "files": ["src"]
 }
