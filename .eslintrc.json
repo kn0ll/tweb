@@ -7,8 +7,6 @@
   ],
   "plugins": ["simple-import-sort"],
   "rules": {
-    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-    "@typescript-eslint/no-unused-vars": "warn",
     "simple-import-sort/exports": "error",
     "simple-import-sort/imports": ["error", {
       "groups": [
@@ -17,6 +15,11 @@
         ["^[^/\\.]"],
         ["^\\."]
       ]
-    }]
+    }],
+    // so we can infer phantom types with arguments instead of awkward generics
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-unused-vars": "warn",
+    // so we can use `unknown` generics in `.tsx` files
+    "@typescript-eslint/no-unnecessary-type-constraint": "off"
   }
 }

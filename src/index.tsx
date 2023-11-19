@@ -1,83 +1,81 @@
 import { Schema } from "@effect/schema";
-import * as React from "react";
+import { Effect } from "effect";
 
-type Method = "GET" | "POST" | "PATCH" | "PUT" | "DELETE";
+import * as Route from "./Route";
 
-type Path = `/${string}`;
-
-type Hash = `#${string}`;
-
-type HttpSchema = {
-  method: Method;
-  path: Path;
-  hash: Hash | null;
-  search: unknown | null;
-};
-
-type HttpRequestSchema = HttpSchema & {
-  body: unknown | null;
-};
-
-type HttpLinkSchema = HttpSchema & {
-  body: null;
-};
-
-// TODO: ensure `METHOD` contains `GET`
-const link =
-  <S extends HttpLinkSchema>(_schema: Schema.Schema<S>) =>
-  ({
-    path,
-    hash,
-    search,
-    children,
-    ...props
-  }: React.PropsWithChildren &
-    Omit<
-      React.DetailedHTMLProps<
-        React.AnchorHTMLAttributes<HTMLAnchorElement>,
-        HTMLAnchorElement
-      >,
-      "href"
-    > & {
-      path: S["path"];
-      hash: S["hash"];
-      search: S["search"];
-    }) => (
-    <a {...props} href={[path, search, hash].join("")}>
-      {children}
-    </a>
-  );
-
-const indexRouteSchema = Schema.struct({
-  method: Schema.union(Schema.literal("GET"), Schema.literal("POST")),
+const getIndex = Schema.struct({
+  method: Schema.literal("GET"),
   path: Schema.literal("/"),
+  hash: Schema.any,
+  search: Schema.any,
+  body: Schema.any,
+});
+
+export const IndexLink = Route.link(getIndex);
+
+const getSignUp = Schema.struct({
+  method: Schema.literal("GET"),
+  path: Schema.literal("/sign-up"),
+  hash: Schema.any,
+  search: Schema.any,
+  body: Schema.any,
+});
+
+export const SignUpLink = Route.link(getSignUp);
+
+const postSignUp = Schema.struct({
+  method: Schema.literal("POST"),
+  path: Schema.literal("/sign-up"),
   hash: Schema.null,
   search: Schema.null,
-  body: Schema.null,
+  body: Schema.struct({
+    username: Schema.string,
+    email: Schema.string,
+    password: Schema.string,
+  }),
 });
 
-const IndexLink = link(indexRouteSchema);
-
-export const Link = IndexLink({
-  path: "/",
-  hash: null,
-  search: null,
-  children: "Text For Link",
+export const SignUpForm = Route.form(postSignUp)("POST", {
+  username: "Foo",
+  email: "Foo",
+  password: "Foo",
 });
 
-const crazyRouteSchema = Schema.struct({
-  method: Schema.union(Schema.literal("GET"), Schema.literal("POST")),
-  path: Schema.literal("/foo/bar"),
-  hash: Schema.literal("#foo"),
-  search: Schema.struct({ username: Schema.string }),
-  body: Schema.null,
-});
+// const indexSchema = Schema.struct({
+//   method: Schema.union(Schema.literal("GET"), Schema.literal("POST")),
+//   path: Schema.literal("/"),
+//   hash: Schema.null,
+//   search: Schema.struct({ username: Schema.string }),
+//   body: Schema.null,
+// });
 
-const CrazyLink = link(crazyRouteSchema);
+// export const handler = Route.handler(indexRouteSchema)(() => Effect.succeed(2));
 
-export const Link2 = CrazyLink({
-  path: "/foo/bar",
-  hash: "#foo",
-  search: { username: "foo" },
-  children: "Text For Link",
-});
+// export const link = Link({
+//   path: "/",
+//   hash: null,
+//   search: { username: "Foo" },
+//   children: "Text For Link",
+// });
+
+// export const Form = Route.form(indexRouteSchema)("GET", { username: "Foo" });
+
+// // TODO: how to POST if it has a search tho :() (maybe depend on Link? we need to accept all the same 4 props....)
+// export const Form2 = Route.form(indexRouteSchema)("POST", null);
+
+// const crazyRouteSchema = Schema.struct({
+//   method: Schema.union(Schema.literal("GET"), Schema.literal("POST")),
+//   path: Schema.literal("/foo/bar"),
+//   hash: Schema.literal("#foo"),
+//   search: Schema.struct({ username: Schema.string }),
+//   body: Schema.null,
+// });
+
+// const CrazyLink = Route.link(crazyRouteSchema);
+
+// const link2 = CrazyLink({
+//   path: "/foo/bar",
+//   hash: "#foo",
+//   search: { username: "foo" },
+//   children: "Text For Link",
+// });
