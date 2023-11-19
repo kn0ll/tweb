@@ -3,6 +3,26 @@ import { Effect } from "effect";
 
 import * as Route from "./Route";
 
+/*
+route Index
+  = GET "/"
+
+route GetSignUp
+  = GET "/sign-up"
+
+route SignUp
+  = POST "/sign-up"
+    username: string
+    email: string
+    password: string
+
+Index.link
+Index.form
+GetSignUp.link
+GetSignUp.form
+SignUp.form
+*/
+
 const getIndex = Schema.struct({
   method: Schema.literal("GET"),
   path: Schema.literal("/"),
