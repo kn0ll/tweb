@@ -1,15 +1,15 @@
 import type { Schema } from "@effect/schema";
-import type { HTTPBody, HTTPLocation } from "./HTTP";
+import type { Location } from "./HTTP";
 
 import * as React from "react";
 
-type HTTPForm<Location extends HTTPLocation> = Location & {
-  body: HTTPBody | null;
+type HTTPForm<L extends Location> = L & {
+  body: unknown | null;
 };
 
 // if method is get, accept search config. if method is other, accept body config
 export const form =
-  <Location extends HTTPLocation, Form extends HTTPForm<Location>>(
+  <L extends Location, Form extends HTTPForm<L>>(
     _schema: Schema.Schema<Form>,
   ) =>
   ({

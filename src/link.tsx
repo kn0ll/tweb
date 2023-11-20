@@ -1,17 +1,17 @@
 import type { Schema } from "@effect/schema";
-import type { HTTPHash, HTTPLocation } from "./HTTP";
+import type { Hash, Location } from "./HTTP";
 
 import * as React from "react";
 
-type HTTPLink<Location extends HTTPLocation> = "GET" extends Location["method"]
-  ? Location & {
-      hash: HTTPHash | null;
+type HTTPLink<L extends Location> = "GET" extends L["method"]
+  ? L & {
+      hash: Hash | null;
     }
   : never;
 
 export const link =
-  <Location extends HTTPLocation, Page extends HTTPLink<Location>>(
-    _schema: "GET" extends Page["method"] ? Schema.Schema<Page> : never,
+  <L extends Location, P extends HTTPLink<L>>(
+    _schema: "GET" extends P["method"] ? Schema.Schema<P> : never,
   ) =>
   ({
     path,
@@ -27,9 +27,9 @@ export const link =
       >,
       "href"
     > & {
-      path: Page["path"];
-      hash: Page["hash"];
-      search: Page["search"];
+      path: P["path"];
+      hash: P["hash"];
+      search: P["search"];
     }) => (
     <a {...props} href={[path, search, hash].join("")}>
       {children}

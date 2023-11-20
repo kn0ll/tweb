@@ -1,15 +1,13 @@
-export type HTTPMethod = "GET" | "POST" | "PATCH" | "PUT" | "DELETE";
+import { Method } from "@effect/platform/Http/Method";
 
-export type HTTPPath = `/${string}`;
+export type Path = `/${string}`;
 
-export type HTTPHash = `#${string}`;
+export type Hash = `#${string}`;
 
-export type HTTPSearch = Record<string, string | string[]>;
+export type Search = Record<string, string | string[]>;
 
-export type HTTPBody = unknown;
-
-export type HTTPLocation = {
-  method: HTTPMethod;
-  path: HTTPPath;
-  search: HTTPSearch | null;
+export type Location = {
+  method: Method;
+  path: Path;
+  search: Search | null;
 };
