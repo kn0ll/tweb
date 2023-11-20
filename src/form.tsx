@@ -17,16 +17,17 @@ export const form =
     ...location
   }: Omit<Form, "body"> & {
     children: (
-      _Input: ({
-        type,
-        id,
-        name,
-      }: {
-        type: any;
-        id: any;
-        name: keyof ("GET" extends Form["method"]
-          ? Form["search"]
-          : Form["body"]);
-      }) => JSX.Element,
+      _Input: (
+        _props: React.DetailedHTMLProps<
+          React.InputHTMLAttributes<HTMLInputElement>,
+          HTMLInputElement
+        > & {
+          name: keyof ("GET" extends Form["method"]
+            ? Form["search"]
+            : Form["body"]);
+        },
+      ) => JSX.Element,
     ) => JSX.Element;
   }) => <form method={location.method}>{children({} as any)}</form>;
+
+<input />;
