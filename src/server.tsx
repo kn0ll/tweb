@@ -10,17 +10,14 @@ import { router } from "./router";
 pipe(
   router([
     Schema.struct({
-      path: Schema.literal("/"),
-      hash: Schema.null,
+      method: Schema.literal("GET"),
+      pathname: Schema.literal("/"),
+      // hash: Schema.null,
       search: Schema.null,
       // hash: Schema.union(Schema.null, Schema.literal("#description")),
       // search: Schema.struct({ username: Schema.string }),
     }),
-    () =>
-      pipe(
-        ServerResponse.empty({ status: 401, statusText: "sup1" }),
-        Effect.succeed,
-      ),
+    () => pipe("Hello World", ServerResponse.text, Effect.succeed),
   ]),
   Http.server.serve(),
   Effect.scoped,
