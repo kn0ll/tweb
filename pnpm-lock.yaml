@@ -1,7 +1,6 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@ava/typescript': ^4.1.0
   '@effect/platform': ^0.30.6
   '@effect/schema': ^0.48.4
   '@types/react': ^18.2.37
@@ -29,12 +28,11 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
 
 devDependencies:
-  '@ava/typescript': 4.1.0
   '@types/react': 18.2.37
   '@types/react-dom': 18.2.15
   '@typescript-eslint/eslint-plugin': 6.11.0_suaazqqmsvjwi354emhlwyvpyq
   '@typescript-eslint/parser': 6.11.0_6acznz3ehjwuvmze655r5sqk3e
-  ava: 5.3.1_@ava+typescript@4.1.0
+  ava: 5.3.1
   eslint: 8.54.0
   eslint-config-prettier: 9.0.0_eslint@8.54.0
   eslint-plugin-prettier: 5.0.1_oedvp5mvnqhy2rzk6rnpm5c4sq
@@ -47,14 +45,6 @@ packages:
   /@aashutoshrathi/word-wrap/1.2.6:
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
     engines: {node: '>=0.10.0'}
-    dev: true
-
-  /@ava/typescript/4.1.0:
-    resolution: {integrity: sha512-1iWZQ/nr9iflhLK9VN8H+1oDZqe93qxNnyYUz+jTzkYPAHc5fdZXBrqmNIgIfFhWYXK5OaQ5YtC7OmLeTNhVEg==}
-    engines: {node: ^14.19 || ^16.15 || ^18 || ^20}
-    dependencies:
-      escape-string-regexp: 5.0.0
-      execa: 7.2.0
     dev: true
 
   /@effect/platform/0.30.6_4vgu5ok2jnv3ld3c7qowfmlame:
@@ -431,7 +421,7 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /ava/5.3.1_@ava+typescript@4.1.0:
+  /ava/5.3.1:
     resolution: {integrity: sha512-Scv9a4gMOXB6+ni4toLuhAm9KYWEjsgBglJl+kMGI5+IVDt120CCDZyB5HNU9DjmLI2t4I0GbnxGLmmRfGTJGg==}
     engines: {node: '>=14.19 <15 || >=16.15 <17 || >=18'}
     hasBin: true
@@ -441,7 +431,6 @@ packages:
       '@ava/typescript':
         optional: true
     dependencies:
-      '@ava/typescript': 4.1.0
       acorn: 8.11.2
       acorn-walk: 8.3.0
       ansi-styles: 6.2.1
