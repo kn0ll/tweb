@@ -1,4 +1,5 @@
 import * as Http from "@effect/platform-node/HttpServer";
+import * as Runtime from "@effect/platform-node/Runtime";
 import { Effect, pipe } from "effect";
 import { createServer } from "node:http";
 
@@ -10,5 +11,5 @@ pipe(
   Effect.scoped,
   Effect.provide(Http.server.layer(createServer, { port: 8080 })),
   Effect.catchAllCause(Effect.logError),
-  Effect.runFork,
+  Runtime.runMain,
 );
