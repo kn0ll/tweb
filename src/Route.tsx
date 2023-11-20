@@ -2,30 +2,36 @@ import { Schema } from "@effect/schema";
 import { Effect } from "effect";
 import * as React from "react";
 
-type Method = "GET" | "POST" | "PATCH" | "PUT" | "DELETE";
+export type HTTPMethod = "GET" | "POST" | "PATCH" | "PUT" | "DELETE";
 
-type Path = `/${string}`;
+export type HTTPPath = `/${string}`;
 
-type Hash = `#${string}`;
+export type HTTPHash = `#${string}`;
 
-type HttpSchema = {
-  method: Method;
-  path: Path;
-  hash: Hash | null;
-  search: unknown | null;
+export type HTTPSearch = Record<string, string | string[]>;
+
+export type HTTPBody = string;
+
+export type HTTPLocation = {
+  method: HTTPMethod;
+  path: HTTPPath;
+  search: HTTPSearch | null;
 };
 
-type HttpRequestSchema = HttpSchema & {
-  body: unknown | null;
+export type HTTPPage<Method extends HTTPMethod> = "GET" extends Method
+  ? HTTPLocation & {
+      hash: HTTPHash | null;
+    }
+  : never;
+
+export type HTTPForm = HTTPLocation & {
+  body: HTTPBody | null;
 };
 
-type HttpLinkSchema = HttpSchema & {
-  body: null;
-};
-
-// TODO: ensure `METHOD` contains `GET`
 export const link =
-  <S extends HttpLinkSchema>(_schema: Schema.Schema<S>) =>
+  <Method extends HTTPMethod, Page extends HTTPPage<Method>>(
+    _schema: "GET" extends Page["method"] ? Schema.Schema<Page> : never,
+  ) =>
   ({
     path,
     hash,
@@ -40,23 +46,18 @@ export const link =
       >,
       "href"
     > & {
-      path: S["path"];
-      hash: S["hash"];
-      search: S["search"];
+      path: Page["path"];
+      hash: Page["hash"];
+      search: Page["search"];
     }) => (
     <a {...props} href={[path, search, hash].join("")}>
       {children}
     </a>
   );
 
-export const handler =
-  <S extends HttpLinkSchema>(schema: Schema.Schema<S>) =>
-  <A extends unknown>(fn: (_s: S) => Effect.Effect<never, never, A>) =>
-    [schema, fn] as const;
-
 // if method is get, accept search config. if method is other, accept body config
 export const form =
-  <S extends HttpRequestSchema>(_schema: Schema.Schema<S>) =>
+  <S extends HTTPForm>(_schema: Schema.Schema<S>) =>
   <M extends S["method"]>({
     method,
     children,
