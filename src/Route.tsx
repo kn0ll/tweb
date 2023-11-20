@@ -56,9 +56,11 @@ export const handler =
 
 // if method is get, accept search config. if method is other, accept body config
 export const form =
-  <S extends HttpRequestSchema>(schema: Schema.Schema<S>) =>
+  <S extends HttpRequestSchema>(_schema: Schema.Schema<S>) =>
   <M extends S["method"]>(
     method: M,
-    config: "GET" extends M ? S["search"] : S["body"],
+    _config: "GET" extends M ? S["search"] : S["body"],
   ) =>
-    [schema, method, config] as const;
+  ({ children }: { children: (_s: { Input: any }) => JSX.Element }) => (
+    <form method={method}>{children({} as any)}</form>
+  );
