@@ -1,5 +1,6 @@
 import { Schema } from "@effect/schema";
 import { Effect } from "effect";
+import * as React from "react";
 
 import * as Route from "./Route";
 
@@ -23,7 +24,27 @@ GetSignUp.form
 SignUp.form
 */
 
-const getIndex = Schema.struct({
+const Doc = ({ children }: React.PropsWithChildren) => (
+  <html>
+    <body>
+      <header>
+        <nav>
+          <ul>
+            <li>
+              <SignUpLink path="/sign-up" hash={null} search={null} />
+            </li>
+            <li>
+              <LogInLink path="/log-in" hash={null} search={null} />
+            </li>
+          </ul>
+        </nav>
+      </header>
+      {children}
+    </body>
+  </html>
+);
+
+const getHome = Schema.struct({
   method: Schema.literal("GET"),
   path: Schema.literal("/"),
   hash: Schema.any,
@@ -31,7 +52,13 @@ const getIndex = Schema.struct({
   body: Schema.any,
 });
 
-export const IndexLink = Route.link(getIndex);
+export const HomeLink = Route.link(getHome);
+
+export const HomePage = () => (
+  <Doc>
+    <h1>Home</h1>
+  </Doc>
+);
 
 const getSignUp = Schema.struct({
   method: Schema.literal("GET"),
@@ -60,6 +87,16 @@ export const SignUpForm = Route.form(postSignUp)("POST", {
   email: "Foo",
   password: "Foo",
 });
+
+const getLogIn = Schema.struct({
+  method: Schema.literal("GET"),
+  path: Schema.literal("/log-in"),
+  hash: Schema.any,
+  search: Schema.any,
+  body: Schema.any,
+});
+
+export const LogInLink = Route.link(getLogIn);
 
 // const indexSchema = Schema.struct({
 //   method: Schema.union(Schema.literal("GET"), Schema.literal("POST")),

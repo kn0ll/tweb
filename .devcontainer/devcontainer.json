@@ -2,7 +2,7 @@
   "name": "Dev",
   "dockerComposeFile": "../docker-compose.yml",
   "service": "dev",
-  "runServices": ["telemetry", "db"],
+  "runServices": ["telemetry"],
   "workspaceFolder": "/opt/dev",
   "postCreateCommand": "pnpm install --frozen-lockfile",
   "customizations": {
