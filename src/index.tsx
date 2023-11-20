@@ -11,7 +11,7 @@ const Doc = ({ children }: React.PropsWithChildren) => (
         <nav>
           <ul>
             <li>
-              <SignUpLink path="/sign-up" hash={null} search={null} />
+              <SignUpLink pathname="/sign-up" hash={null} search={null} />
             </li>
           </ul>
         </nav>
@@ -23,7 +23,7 @@ const Doc = ({ children }: React.PropsWithChildren) => (
 
 const getHome = Schema.struct({
   method: Schema.literal("GET"),
-  path: Schema.literal("/"),
+  pathname: Schema.literal("/"),
   hash: Schema.any,
   search: Schema.any,
   body: Schema.any,
@@ -39,7 +39,7 @@ export const HomePage = () => (
 
 const getSignUp = Schema.struct({
   method: Schema.literal("GET"),
-  path: Schema.literal("/sign-up"),
+  pathname: Schema.literal("/sign-up"),
   hash: Schema.any,
   search: Schema.any,
   body: Schema.any,
@@ -49,7 +49,7 @@ export const SignUpLink = link(getSignUp);
 
 const postSignUp = Schema.struct({
   method: Schema.literal("POST"),
-  path: Schema.literal("/sign-up"),
+  pathname: Schema.literal("/sign-up"),
   hash: Schema.null,
   search: Schema.null,
   body: Schema.struct({
@@ -66,7 +66,7 @@ export const SignUpPage = () => (
     <h1>Sign Up</h1>
     {/* 1. probably need to accept same props as link. ie method="GET" (we can use this to determine what Input provides, query or body) */}
     {/* 2. on that notes, query will need to be set on `action` by us... */}
-    <SignUpForm method="POST" path="/sign-up" hash={null} search={null}>
+    <SignUpForm method="POST" pathname="/sign-up" hash={null} search={null}>
       {(Input) => (
         <>
           <label htmlFor="username">Username</label>

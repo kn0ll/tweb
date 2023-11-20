@@ -14,7 +14,7 @@ export const link =
     _schema: "GET" extends P["method"] ? Schema.Schema<P> : never,
   ) =>
   ({
-    path,
+    pathname,
     hash,
     search,
     children,
@@ -27,11 +27,11 @@ export const link =
       >,
       "href"
     > & {
-      path: P["path"];
+      pathname: P["pathname"];
       hash: P["hash"];
       search: P["search"];
     }) => (
-    <a {...props} href={[path, search, hash].join("")}>
+    <a {...props} href={[pathname, search, hash].join("")}>
       {children}
     </a>
   );
