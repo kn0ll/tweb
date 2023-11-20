@@ -10,7 +10,7 @@ export type HTTPHash = `#${string}`;
 
 export type HTTPSearch = Record<string, string | string[]>;
 
-export type HTTPBody = string;
+export type HTTPBody = unknown;
 
 export type HTTPLocation = {
   method: HTTPMethod;
@@ -18,18 +18,19 @@ export type HTTPLocation = {
   search: HTTPSearch | null;
 };
 
-export type HTTPPage<Method extends HTTPMethod> = "GET" extends Method
-  ? HTTPLocation & {
-      hash: HTTPHash | null;
-    }
-  : never;
+export type HTTPPage<Location extends HTTPLocation> =
+  "GET" extends Location["method"]
+    ? Location & {
+        hash: HTTPHash | null;
+      }
+    : never;
 
-export type HTTPForm = HTTPLocation & {
+export type HTTPForm<Location extends HTTPLocation> = Location & {
   body: HTTPBody | null;
 };
 
 export const link =
-  <Method extends HTTPMethod, Page extends HTTPPage<Method>>(
+  <Location extends HTTPLocation, Page extends HTTPPage<Location>>(
     _schema: "GET" extends Page["method"] ? Schema.Schema<Page> : never,
   ) =>
   ({
@@ -57,12 +58,13 @@ export const link =
 
 // if method is get, accept search config. if method is other, accept body config
 export const form =
-  <S extends HTTPForm>(_schema: Schema.Schema<S>) =>
-  <M extends S["method"]>({
-    method,
+  <Location extends HTTPLocation, Form extends HTTPForm<Location>>(
+    _schema: Schema.Schema<Form>,
+  ) =>
+  ({
     children,
-  }: {
-    method: M;
+    ...location
+  }: Omit<Form, "body"> & {
     children: (
       Input: ({
         type,
@@ -74,4 +76,4 @@ export const form =
         name: keyof ("GET" extends M ? S["search"] : S["body"]);
       }) => JSX.Element,
     ) => JSX.Element;
-  }) => <form method={method}>{children({} as any)}</form>;
+  }) => <form method={location.method}>{children({} as any)}</form>;
