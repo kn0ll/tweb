@@ -1,21 +1,26 @@
 import * as ServerRequest from "@effect/platform/Http/ServerRequest";
 import * as ServerResponse from "@effect/platform/Http/ServerResponse";
-import { Console, Effect, pipe } from "effect";
+import { Console, Effect, identity, pipe, ReadonlyRecord } from "effect";
 import querystring from "node:querystring";
-import url from "node:url";
+
+const parsePath = (path: string) =>
+  Effect.sync(() => {
+    const [pathname, search] = path.split("?");
+
+    return {
+      pathname: pathname || "",
+      search: search ? querystring.parse(search) : null,
+    };
+  });
 
 export const router = () =>
   pipe(
     ServerRequest.ServerRequest,
     Effect.flatMap((request) =>
       pipe(
-        Effect.sync(() => url.parse(request.url)),
-        Effect.map((parsed) => ({
-          method: request.method,
-          pathname: parsed.pathname,
-          search: querystring.parse(parsed.search?.slice(1) || ""),
-        })),
-        Effect.flatMap(Console.log),
+        parsePath(request.url),
+        Effect.map(ReadonlyRecord.union({ method: request.method }, identity)),
+        Effect.flatMap((x) => Console.log(x)),
         Effect.flatMap(() =>
           pipe(
             ServerResponse.empty({ status: 401, statusText: "sup1" }),
