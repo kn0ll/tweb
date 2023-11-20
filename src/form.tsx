@@ -1,6 +1,6 @@
+import type { Schema } from "@effect/schema";
 import type { HTTPBody, HTTPLocation } from "./HTTP";
 
-import { Schema } from "@effect/schema";
 import * as React from "react";
 
 type HTTPForm<Location extends HTTPLocation> = Location & {
