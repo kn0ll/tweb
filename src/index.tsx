@@ -58,20 +58,15 @@ const postSignUp = Schema.struct({
   }),
 });
 
-export const SignUpForm = Route.form(postSignUp)("POST", {
-  username: "Foo",
-  email: "Foo",
-  password: "Foo",
-});
+export const SignUpForm = Route.form(postSignUp);
 
 export const SignUpPage = () => (
   <Doc>
     <h1>Sign Up</h1>
     {/* 1. probably need to accept same props as link. ie method="GET" (we can use this to determine what Input provides, query or body) */}
     {/* 2. on that notes, query will need to be set on `action` by us... */}
-    {/* 3. these are all strings so we might need to map everything... */}
-    <SignUpForm>
-      {({ Input }) => (
+    <SignUpForm method="POST">
+      {(Input) => (
         <>
           <label htmlFor="username">Username</label>
           <Input type="text" name="username" id="username" />
