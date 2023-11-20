@@ -61,6 +61,18 @@ export const form =
     method: M,
     _config: "GET" extends M ? S["search"] : S["body"],
   ) =>
-  ({ children }: { children: (_s: { Input: any }) => JSX.Element }) => (
-    <form method={method}>{children({} as any)}</form>
-  );
+  ({
+    children,
+  }: {
+    children: (_s: {
+      Input: ({
+        type,
+        id,
+        name,
+      }: {
+        type: any;
+        id: any;
+        name: keyof ("GET" extends M ? S["search"] : S["body"]);
+      }) => JSX.Element;
+    }) => JSX.Element;
+  }) => <form method={method}>{children({} as any)}</form>;
