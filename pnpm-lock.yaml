@@ -2,7 +2,9 @@ lockfileVersion: 5.4
 
 specifiers:
   '@effect/platform': ^0.30.6
+  '@effect/platform-node': ^0.31.9
   '@effect/schema': ^0.48.4
+  '@types/node': ^20.9.2
   '@types/react': ^18.2.37
   '@types/react-dom': ^18.2.15
   '@typescript-eslint/eslint-plugin': ^6.11.0
@@ -22,7 +24,9 @@ specifiers:
 
 devDependencies:
   '@effect/platform': 0.30.6_4vgu5ok2jnv3ld3c7qowfmlame
+  '@effect/platform-node': 0.31.9_4vgu5ok2jnv3ld3c7qowfmlame
   '@effect/schema': 0.48.4_tlu67fmnuvvh7ffprvbrclp5ea
+  '@types/node': 20.9.2
   '@types/react': 18.2.37
   '@types/react-dom': 18.2.15
   '@typescript-eslint/eslint-plugin': 6.11.0_suaazqqmsvjwi354emhlwyvpyq
@@ -49,6 +53,19 @@ packages:
 
   /@bcoe/v8-coverage/0.2.3:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
+    dev: true
+
+  /@effect/platform-node/0.31.9_4vgu5ok2jnv3ld3c7qowfmlame:
+    resolution: {integrity: sha512-paV3NIOgkQVLrB6D+ChDNLppZzfPfInc6Hc/1bKRX53PF6jobq3+15MignbT765yPW/0Y2g0Eu1zNZBE5ouQbg==}
+    peerDependencies:
+      effect: 2.0.0-next.55
+    dependencies:
+      '@effect/platform': 0.30.6_4vgu5ok2jnv3ld3c7qowfmlame
+      effect: 2.0.0-next.55
+      mime: 3.0.0
+      multipasta: 0.1.18
+    transitivePeerDependencies:
+      - '@effect/schema'
     dev: true
 
   /@effect/platform/0.30.6_4vgu5ok2jnv3ld3c7qowfmlame:
@@ -191,6 +208,12 @@ packages:
 
   /@types/json-schema/7.0.15:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
+    dev: true
+
+  /@types/node/20.9.2:
+    resolution: {integrity: sha512-WHZXKFCEyIUJzAwh3NyyTHYSR35SevJ6mZ1nWwJafKtiQbqRTIKSRcw3Ma3acqgsent3RRDqeVwpHntMk+9irg==}
+    dependencies:
+      undici-types: 5.26.5
     dev: true
 
   /@types/prop-types/15.7.10:
@@ -1522,6 +1545,12 @@ packages:
       picomatch: 2.3.1
     dev: true
 
+  /mime/3.0.0:
+    resolution: {integrity: sha512-jSCU7/VB1loIWBZe14aEYHU/+1UMEHoaO7qxCOVJOw9GgH72VAWppxNcjU+x9a2k3GSIBXNKxXQFqRvvZ7vr3A==}
+    engines: {node: '>=10.0.0'}
+    hasBin: true
+    dev: true
+
   /mimic-fn/2.1.0:
     resolution: {integrity: sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==}
     engines: {node: '>=6'}
@@ -2074,6 +2103,10 @@ packages:
     resolution: {integrity: sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==}
     engines: {node: '>=14.17'}
     hasBin: true
+    dev: true
+
+  /undici-types/5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
     dev: true
 
   /untildify/4.0.0:

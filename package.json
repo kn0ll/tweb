@@ -8,7 +8,9 @@
   },
   "devDependencies": {
     "@effect/platform": "^0.30.6",
+    "@effect/platform-node": "^0.31.9",
     "@effect/schema": "^0.48.4",
+    "@types/node": "^20.9.2",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
