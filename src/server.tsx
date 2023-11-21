@@ -35,6 +35,8 @@ const Doc = ({ children }: React.PropsWithChildren) => (
   </html>
 );
 
+// TODO: make handler which accepts a schema and exports { Link, Form } or { Form }
+
 const homePageSchema = Schema.struct({
   method: Schema.literal("GET"),
   pathname: Schema.literal("/"),
