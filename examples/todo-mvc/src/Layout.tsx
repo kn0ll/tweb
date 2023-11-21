@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import { HomePageLink } from "./routes/HomePage.js";
-import { SignUpPageLink } from "./routes/SignUpPage.js";
 
 export default ({ children }: React.PropsWithChildren) => (
   <html>
@@ -12,15 +11,6 @@ export default ({ children }: React.PropsWithChildren) => (
             Logo
           </HomePageLink>
         </h1>
-        <nav>
-          <ul>
-            <li>
-              <SignUpPageLink pathname="/sign-up" hash={null} search={null}>
-                Sign Up
-              </SignUpPageLink>
-            </li>
-          </ul>
-        </nav>
       </header>
       {children}
     </body>

@@ -1,6 +1,6 @@
 import { Effect } from "effect";
 
-type Todo = {
+export type Todo = {
   title: string;
   updatedAt: Date;
 };
