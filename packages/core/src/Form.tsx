@@ -4,7 +4,7 @@ import type { Location } from "./HTTP.js";
 import { flow } from "effect";
 import * as React from "react";
 
-import * as DOM from "./DOM.js";
+import * as DOMElement from "./DOMElement.js";
 
 /**
  * @category types
@@ -65,5 +65,5 @@ export const make = <L extends Location, Form extends FormLocation<L>>(
       method: location.method,
       children: children(FormInput),
     }),
-    DOM.createElement("form"),
+    DOMElement.make("form"),
   );
