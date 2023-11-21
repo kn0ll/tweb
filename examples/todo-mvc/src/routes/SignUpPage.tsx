@@ -2,7 +2,7 @@ import { Schema } from "@effect/schema";
 import * as React from "react";
 import { Link, Route } from "tweb";
 
-import { Layout } from "./Layout.js";
+import { Layout } from "../Layout.js";
 import { SignUpForm } from "./SignUpForm.js";
 
 export const signUpPageSchema = Schema.struct({

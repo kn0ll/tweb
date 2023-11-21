@@ -4,9 +4,9 @@ import { Effect, pipe } from "effect";
 import { createServer } from "node:http";
 import { Router } from "tweb";
 
-import HomePage from "./HomePage.js";
-import SignUpForm from "./SignUpForm.js";
-import SignUpPage from "./SignUpPage.js";
+import HomePage from "./routes/HomePage.js";
+import SignUpForm from "./routes/SignUpForm.js";
+import SignUpPage from "./routes/SignUpPage.js";
 
 pipe(
   Router.make([HomePage, SignUpPage, SignUpForm]),
