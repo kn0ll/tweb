@@ -28,7 +28,12 @@ export const make =
         },
       ) => JSX.Element,
     ) => JSX.Element;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  }) => <form method={location.method}>{children({} as any)}</form>;
+  }) => (
+    <form method={location.method}>
+      {children((props) => (
+        <input {...props} />
+      ))}
+    </form>
+  );
 
 <input />;
