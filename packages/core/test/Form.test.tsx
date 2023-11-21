@@ -2,7 +2,7 @@ import { Schema } from "@effect/schema";
 import test from "ava";
 import * as React from "react";
 
-import * as Form from "../src/Form";
+import * as Form from "../src/Form.js";
 
 const UpdateProfileForm = Form.make(
   Schema.struct({

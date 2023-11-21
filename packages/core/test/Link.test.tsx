@@ -2,7 +2,7 @@ import { Schema } from "@effect/schema";
 import test from "ava";
 import { pipe } from "effect";
 
-import * as Link from "../src/Link";
+import * as Link from "../src/Link.js";
 
 const linkSchema = Schema.struct({
   pathname: Schema.literal("/profile"),

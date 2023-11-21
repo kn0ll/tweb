@@ -1,5 +1,5 @@
 import type { Schema } from "@effect/schema";
-import type { Location } from "./HTTP";
+import type { Location } from "./HTTP.js";
 
 import * as React from "react";
 

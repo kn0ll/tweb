@@ -1,4 +1,4 @@
-import type { Route } from "./Route";
+import type { Route } from "./Route.js";
 
 import * as ServerRequest from "@effect/platform/Http/ServerRequest";
 import * as ServerResponse from "@effect/platform/Http/ServerResponse";

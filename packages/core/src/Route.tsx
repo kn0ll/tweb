@@ -1,10 +1,10 @@
 import type { Schema } from "@effect/schema";
-import type { Location } from "./HTTP";
+import type { Location } from "./HTTP.js";
 
 import * as ServerResponse from "@effect/platform/Http/ServerResponse";
 import { Effect, flow } from "effect";
 
-import * as Response from "./Response";
+import * as Response from "./Response.js";
 
 export type Route<R, E, A extends Location> = readonly [
   schema: Schema.Schema<A>,

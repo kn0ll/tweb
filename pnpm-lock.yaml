@@ -34,6 +34,7 @@ importers:
       fast-check: ^3.13.2
       react: ^18.2.0
       react-dom: ^18.2.0
+      tweb: ^1.0.0
     dependencies:
       '@effect/platform': 0.30.6_ahljyljorygtkwayn2ohjn67ui
       '@effect/platform-node': 0.31.9_ahljyljorygtkwayn2ohjn67ui
@@ -42,6 +43,7 @@ importers:
       fast-check: 3.14.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      tweb: link:../../packages/core
     devDependencies:
       '@types/node': 20.9.3
       '@types/react': 18.2.38

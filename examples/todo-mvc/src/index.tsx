@@ -5,11 +5,7 @@ import { Schema } from "@effect/schema";
 import { Effect, pipe } from "effect";
 import { createServer } from "node:http";
 import * as React from "react";
-
-import * as Form from "./Form.js";
-import * as Link from "./Link.js";
-import * as Route from "./Route.js";
-import * as Router from "./Router.js";
+import { Form, Link, Route, Router } from "tweb";
 
 const Doc = ({ children }: React.PropsWithChildren) => (
   <html>
