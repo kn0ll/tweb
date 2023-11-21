@@ -12,32 +12,12 @@ import {
 } from "effect";
 import querystring from "node:querystring";
 
-type Route<R, E, A> = [
+type Route<R, E, A> = readonly [
   schema: Schema.Schema<A>,
   handler: (_a: A) => Effect.Effect<R, E, ServerResponse.ServerResponse>,
 ];
-// Router.searchParams
-const parsePath = (path: string) =>
-  Effect.sync(() => {
-    const [pathname, search] = path.split("?");
 
-    return {
-      pathname: pathname || "",
-      search: search ? querystring.parse(search) : null,
-    };
-  });
-
-const parseRequest = ({ url, method }: ServerRequest.ServerRequest) =>
-  pipe(parsePath(url), Effect.map(ReadonlyRecord.union({ method }, identity)));
-
-export const make = (router = []) => router;
-
-export const add = <R, E, A>(route: Route<R, E, A>) =>
-  ReadonlyArray.append(route);
-
-export const app = <R, E>(
-  routes: ReadonlyArray.NonEmptyArray<Route<R, E, any>>,
-) => {
+export const make = <R, E>(routes: readonly Route<R, E, any>[]) => {
   const matchers = ReadonlyArray.map(routes, ([aa, bb]) =>
     Match.when(Schema.is(aa), bb),
   ) as [
@@ -54,7 +34,17 @@ export const app = <R, E>(
 
   return pipe(
     ServerRequest.ServerRequest,
-    Effect.flatMap(parseRequest),
+    Effect.flatMap(({ url, method }) =>
+      pipe(
+        Effect.sync(() =>
+          pipe(url.split("?"), ([pathname, search]) => ({
+            pathname: pathname || "",
+            search: search ? querystring.parse(search) : null,
+          })),
+        ),
+        Effect.map(ReadonlyRecord.union({ method }, identity)),
+      ),
+    ),
     Effect.flatMap(
       flow(
         Match.value,
