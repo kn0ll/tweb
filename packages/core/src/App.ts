@@ -1,3 +1,4 @@
+import type { Default } from "@effect/platform/Http/App";
 import type { Route } from "./Route.js";
 
 import * as ServerRequest from "@effect/platform/Http/ServerRequest";
@@ -14,7 +15,9 @@ import {
 } from "effect";
 import querystring from "node:querystring";
 
-export const make = <R, E>(routes: readonly Route<R, E, any>[]) => {
+export const make = <R, E>(
+  routes: readonly Route<R, E, any>[],
+): Default<R, E> => {
   const matchers = ReadonlyArray.map(routes, ([aa, bb]) =>
     Match.when(Schema.is(pipe(aa, Schema.omit("hash"))), bb),
   ) as [
