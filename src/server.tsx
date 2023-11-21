@@ -2,13 +2,14 @@ import * as ServerResponse from "@effect/platform/Http/ServerResponse";
 import * as Http from "@effect/platform-node/HttpServer";
 import * as Runtime from "@effect/platform-node/Runtime";
 import { Schema } from "@effect/schema";
-import { Effect, pipe } from "effect";
+import { Effect, flow, pipe } from "effect";
 import { createServer } from "node:http";
 import * as React from "react";
 import { renderToString } from "react-dom/server";
 
 import * as Form from "./Form";
 import * as Link from "./Link";
+import * as Response from "./Response";
 import * as Route from "./Route";
 import * as Router from "./Router";
 
@@ -43,11 +44,20 @@ const homePageSchema = Schema.struct({
 
 const HomePageLink = Link.make(homePageSchema);
 
-const homePage = Route.page(homePageSchema, () => (
-  <Doc>
-    <h1>Home Page</h1>
-  </Doc>
-));
+const homePage = Route.make(
+  homePageSchema,
+  flow(
+    ({ method, pathname }) => (
+      <Doc>
+        <h1>
+          Home ({method} {pathname})
+        </h1>
+      </Doc>
+    ),
+    Response.react,
+    Effect.succeed,
+  ),
+);
 
 const signUpPageSchema = Schema.struct({
   method: Schema.literal("GET"),
