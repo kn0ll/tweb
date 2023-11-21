@@ -1,3 +1,5 @@
+import type { Route } from "./Route";
+
 import * as ServerRequest from "@effect/platform/Http/ServerRequest";
 import * as ServerResponse from "@effect/platform/Http/ServerResponse";
 import { Schema } from "@effect/schema";
@@ -12,14 +14,9 @@ import {
 } from "effect";
 import querystring from "node:querystring";
 
-type Route<R, E, A> = readonly [
-  schema: Schema.Schema<A>,
-  handler: (_a: A) => Effect.Effect<R, E, ServerResponse.ServerResponse>,
-];
-
-export const make = <R, E>(routes: readonly Route<R, E, any>[]) => {
+export const make = <R, E, A>(routes: readonly Route<R, E, any>[]) => {
   const matchers = ReadonlyArray.map(routes, ([aa, bb]) =>
-    Match.when(Schema.is(aa), bb),
+    Match.when(Schema.is(pipe(aa, Schema.omit("hash"))), bb),
   ) as [
     <I, F, A, Pr>(
       _self: Match.Matcher<I, F, unknown, A, Pr>,

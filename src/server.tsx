@@ -5,6 +5,7 @@ import { Schema } from "@effect/schema";
 import { Effect, pipe } from "effect";
 import { createServer } from "node:http";
 import * as React from "react";
+import { renderToString } from "react-dom/server";
 
 import * as Form from "./Form";
 import * as Link from "./Link";
@@ -17,7 +18,7 @@ const Doc = ({ children }: React.PropsWithChildren) => (
       <header>
         <h1>
           <HomePageLink pathname="/" hash={null} search={null}>
-            Home
+            Logo
           </HomePageLink>
         </h1>
         <nav>
@@ -42,17 +43,11 @@ const homePageSchema = Schema.struct({
 
 const HomePageLink = Link.make(homePageSchema);
 
-const homePage = Route.make(homePageSchema, ({ method, pathname, search }) =>
-  pipe("Home Page", ServerResponse.text, Effect.succeed),
-);
-
-/*
-() => (
+const homePage = Route.page(homePageSchema, () => (
   <Doc>
-    <h1>Home</h1>
+    <h1>Home Page</h1>
   </Doc>
-)
-*/
+));
 
 const signUpPageSchema = Schema.struct({
   method: Schema.literal("GET"),
@@ -63,10 +58,8 @@ const signUpPageSchema = Schema.struct({
 
 const SignUpLink = Link.make(signUpPageSchema);
 
-const signUpPage = Route.make(
-  signUpPageSchema,
-  ({ method, pathname, search }) =>
-    pipe("Sign Up", ServerResponse.text, Effect.succeed),
+const signUpPage = Route.make(signUpPageSchema, () =>
+  pipe("Sign Up", ServerResponse.text, Effect.succeed),
 );
 
 /*
