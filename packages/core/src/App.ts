@@ -20,8 +20,8 @@ import querystring from "node:querystring";
  * TODO: i think we're losing `R` here which is important :o
  * @category constructors
  */
-export const make = <R, E, A extends Location>(
-  router: Route<R, E, any>[],
+export const make = <R, E, A extends Location, T>(
+  router: Route<R, E, any, any>[],
 ): Default<R, E> => {
   const matchers = ReadonlyArray.map(router, ([aa, bb]) =>
     Match.when(Schema.is(pipe(aa, Schema.omit("hash"))), bb),

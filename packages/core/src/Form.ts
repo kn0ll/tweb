@@ -56,8 +56,8 @@ export const FormInput: <F extends FormLocation<Location>>(
  * TODO: accept other html props like classname (we do this fine in Link, i just punted this cause of naming conflicts)
  * @category constructors
  */
-export const make = <L extends Location, Form extends FormLocation<L>>(
-  schema: Schema.Schema<Form>,
+export const make = <L extends Location, Form extends FormLocation<L>, T>(
+  schema: Schema.Schema<Form, T>,
 ) =>
   flow(
     ({ children, ...location }: FormProps<Form>) => ({

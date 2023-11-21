@@ -3,20 +3,18 @@ import { Schema } from "@effect/schema";
 import { Effect, pipe } from "effect";
 import { Form, Route } from "tweb";
 
-export const signUpFormSchema = Schema.struct({
+export const deleteTodoFormSchema = Schema.struct({
   method: Schema.literal("POST"),
   pathname: Schema.literal("/sign-up"),
   search: Schema.null,
   body: Schema.struct({
-    username: Schema.string,
-    password: Schema.string,
-    email: Schema.string,
+    id: pipe(Schema.string, Schema.numberFromString),
   }),
 });
 
-export const SignUpForm = Form.make(signUpFormSchema);
+export const DeleteTodoForm = Form.make(deleteTodoFormSchema);
 
-// TODO: need to parse body...
-export const signUpFormRoute = Route.make(signUpFormSchema, () =>
+// TODO: need to parse body (annotate body schema?)...
+export const deleteTodoFormRoute = Route.make(deleteTodoFormSchema, () =>
   pipe("Sign Up Form", ServerResponse.text, Effect.succeed),
 );

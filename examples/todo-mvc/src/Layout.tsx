@@ -1,15 +1,15 @@
 import * as React from "react";
 
-import { HomePageLink } from "./routes/HomePage.js";
+import { TodosPageLink } from "./routes/TodosPage.js";
 
 export default ({ children }: React.PropsWithChildren) => (
   <html>
     <body>
       <header>
         <h1>
-          <HomePageLink pathname="/" hash={null} search={null}>
+          <TodosPageLink pathname="/" hash={null} search={null}>
             Logo
-          </HomePageLink>
+          </TodosPageLink>
         </h1>
       </header>
       {children}

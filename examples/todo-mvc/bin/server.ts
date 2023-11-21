@@ -2,12 +2,11 @@ import * as Runtime from "@effect/platform-node/Runtime";
 import { pipe } from "effect";
 import { App, Server } from "tweb";
 
-import { homePageRoute } from "../src/routes/HomePage.js";
-import { signUpFormRoute } from "../src/routes/SignUpForm.js";
-import { signUpPageRoute } from "../src/routes/SignUpPage.js";
+import { deleteTodoFormRoute } from "../src/routes/DeleteTodoForm.js";
+import { todosPageRoute } from "../src/routes/TodosPage.js";
 
 pipe(
-  App.make([homePageRoute, signUpFormRoute, signUpPageRoute]),
+  App.make([todosPageRoute, deleteTodoFormRoute]),
   Server.make({ port: 8000 }),
   Runtime.runMain,
 );
