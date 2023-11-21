@@ -6,6 +6,7 @@ import {
   flow,
   identity,
   Match,
+  Option,
   pipe,
   ReadonlyArray,
   ReadonlyRecord,
@@ -29,6 +30,28 @@ type Route<R, E, A> = [
   schema: Schema.Schema<A>,
   handler: (_a: A) => Effect.Effect<R, E, ServerResponse.ServerResponse>,
 ];
+
+const foo = (routes: Route<unknown, unknown, unknown>[]) => (input: unknown) =>
+  Effect.iterate(
+    { routes, result: Option.none<ServerResponse.ServerResponse>() },
+    {
+      while: ({ result }) => Option.isNone(result),
+      body: ({ routes, result }) =>
+        pipe(
+          routes,
+          ReadonlyArray.head,
+          Effect.flatMap(([schema, handler]) =>
+            pipe(
+              input,
+              Schema.parse(schema),
+              (x) => x,
+              () => Effect.succeed({ routes, result }),
+            ),
+          ),
+          () => Effect.succeed({ routes, result }),
+        ),
+    },
+  );
 
 export const router = <R, E, A>(handlers: Route<R, E, A>[]) => {
   const x = ReadonlyArray.map(handlers, ([schema, handler]) =>
@@ -55,3 +78,5 @@ export const router = <R, E, A>(handlers: Route<R, E, A>[]) => {
     ),
   );
 };
+
+// Effect.loop
