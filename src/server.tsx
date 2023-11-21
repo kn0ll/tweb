@@ -45,6 +45,7 @@ pipe(
     }),
     () => pipe("Sign Up", ServerResponse.text, Effect.succeed),
   ]),
+  (x) => x,
   Router.app,
   (x) => x,
   Http.server.serve(),

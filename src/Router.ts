@@ -35,9 +35,11 @@ export const make = (router = []) => router;
 export const add = <R, E, A>(route: Route<R, E, A>) =>
   ReadonlyArray.append(route);
 
-export const app = <R, E>(routes: Route<R, E, any>[]) => {
+export const app = <R, E>(
+  routes: ReadonlyArray.NonEmptyArray<Route<R, E, any>>,
+) => {
   const matchers = ReadonlyArray.map(routes, ([aa, bb]) =>
-    Match.when(Schema.is(aa), (a) => bb(a as A)),
+    Match.when(Schema.is(aa), bb),
   ) as [
     <I, F, A, Pr>(
       _self: Match.Matcher<I, F, unknown, A, Pr>,
@@ -45,7 +47,7 @@ export const app = <R, E>(routes: Route<R, E, any>[]) => {
       I,
       Match.Types.AddWithout<F, any>,
       Match.Types.ApplyFilters<I, Match.Types.AddWithout<F, any>>,
-      Effect.Effect<any, any, any> | A,
+      Effect.Effect<R, E, ServerResponse.ServerResponse> | A,
       Pr
     >,
   ];
