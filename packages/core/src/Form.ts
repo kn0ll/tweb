@@ -53,6 +53,7 @@ export const FormInput: <F extends FormLocation<Location>>(
 
 /**
  * TODO: if method is get, accept search config. if method is other, accept body config
+ * TODO: accept other html props like classname (we do this fine in Link, i just punted this cause of naming conflicts)
  * @category constructors
  */
 export const make = <L extends Location, Form extends FormLocation<L>>(
