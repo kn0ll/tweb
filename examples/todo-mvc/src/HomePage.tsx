@@ -3,7 +3,7 @@ import { Effect, flow } from "effect";
 import * as React from "react";
 import { Link, Response, Route } from "tweb";
 
-import { Layout } from "../Layout.js";
+import { Layout } from "./Layout.js";
 
 export const homePageSchema = Schema.struct({
   method: Schema.literal("GET"),

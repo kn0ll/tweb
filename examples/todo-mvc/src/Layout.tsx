@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { HomePageLink } from "./routes/HomePage.js";
-import { SignUpPageLink } from "./routes/SignUpPage.js";
+import { HomePageLink } from "./HomePage.js";
+import { SignUpPageLink } from "./SignUpPage.js";
 
 export const Layout = ({ children }: React.PropsWithChildren) => (
   <html>

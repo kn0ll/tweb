@@ -4,7 +4,7 @@
     "jsx": "react",
     "outDir": "lib"
   },
-  "include": ["src"],
+  "include": ["src", "bin"],
   "references": [
     { "path": "../../packages/core/tsconfig.json" }
   ]
