@@ -6,7 +6,6 @@ import {
   flow,
   identity,
   Match,
-  Option,
   pipe,
   ReadonlyArray,
   ReadonlyRecord,
@@ -39,11 +38,7 @@ export const add = <R, E, A>(route: Route<R, E, A>) =>
 export const app = <R, E>(routes: Route<R, E, any>[]) => {
   const matchers = ReadonlyArray.map(routes, ([aa, bb]) =>
     Match.when(Schema.is(aa), (a) => bb(a as A)),
-  );
-
-  const f = (
-    a: any[],
-  ): [
+  ) as [
     <I, F, A, Pr>(
       _self: Match.Matcher<I, F, unknown, A, Pr>,
     ) => Match.Matcher<
@@ -53,7 +48,7 @@ export const app = <R, E>(routes: Route<R, E, any>[]) => {
       Effect.Effect<any, any, any> | A,
       Pr
     >,
-  ] => a;
+  ];
 
   return pipe(
     ServerRequest.ServerRequest,
@@ -61,7 +56,7 @@ export const app = <R, E>(routes: Route<R, E, any>[]) => {
     Effect.flatMap(
       flow(
         Match.value,
-        ...f(matchers),
+        ...matchers,
         Match.orElse(() =>
           Effect.succeed(ServerResponse.empty({ status: 404 })),
         ),
