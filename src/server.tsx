@@ -44,20 +44,13 @@ const homePageSchema = Schema.struct({
 
 const HomePageLink = Link.make(homePageSchema);
 
-const homePage = Route.make(
-  homePageSchema,
-  flow(
-    ({ method, pathname }) => (
-      <Doc>
-        <h1>
-          Home ({method} {pathname})
-        </h1>
-      </Doc>
-    ),
-    Response.react,
-    Effect.succeed,
-  ),
-);
+const homePage = Route.page(homePageSchema, ({ method, pathname }) => (
+  <Doc>
+    <h1>
+      Home ({method} {pathname})
+    </h1>
+  </Doc>
+));
 
 const signUpPageSchema = Schema.struct({
   method: Schema.literal("GET"),
