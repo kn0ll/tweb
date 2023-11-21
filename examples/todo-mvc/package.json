@@ -2,10 +2,15 @@
   "name": "@tweb/example-todo-mvc",
   "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "dev": "tsx bin/server"
+  },
   "devDependencies": {
     "@types/node": "^20.9.2",
     "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15"
+    "@types/react-dom": "^18.2.15",
+    "tsx": "^4.2.0",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
     "@effect/platform": "^0.30.6",
