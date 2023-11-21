@@ -9,9 +9,10 @@
     "declaration": true,
     "noEmitOnError": true,
     "sourceMap": true,
-    "incremental": true,
-    "jsx": "react",
-    "outDir": "lib"
+    "incremental": true
   },
-  "include": ["src", "test"]
+  "files": [],
+  "references": [
+    { "path": "./packages/core/tsconfig.json" }
+  ]
 }
