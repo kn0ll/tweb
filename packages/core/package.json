@@ -8,7 +8,8 @@
     "./Link": "./lib/src/Link.js",
     "./Route": "./lib/src/Route.js",
     "./Response": "./lib/src/Response.js",
-    "./Router": "./lib/src/Router.js"
+    "./Router": "./lib/src/Router.js",
+    "./Server": "./lib/src/Server.js"
   },
   "scripts": {
     "test": "c8 -r html ava lib/test"

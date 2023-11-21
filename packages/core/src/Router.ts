@@ -14,7 +14,7 @@ import {
 } from "effect";
 import querystring from "node:querystring";
 
-export const make = <R, E, A>(routes: readonly Route<R, E, any>[]) => {
+export const make = <R, E>(routes: readonly Route<R, E, any>[]) => {
   const matchers = ReadonlyArray.map(routes, ([aa, bb]) =>
     Match.when(Schema.is(pipe(aa, Schema.omit("hash"))), bb),
   ) as [
