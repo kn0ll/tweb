@@ -1,6 +1,7 @@
 import { Schema } from "@effect/schema";
+import { Effect, flow } from "effect";
 import * as React from "react";
-import { Link, Route } from "tweb";
+import { Link, Response, Route } from "tweb";
 
 import { Layout } from "../Layout.js";
 
@@ -13,10 +14,17 @@ export const homePageSchema = Schema.struct({
 
 export const HomePageLink = Link.make(homePageSchema);
 
-export default Route.page(homePageSchema, ({ method, pathname }) => (
-  <Layout>
-    <h1>
-      Home ({method} {pathname})
-    </h1>
-  </Layout>
-));
+export default Route.make(
+  homePageSchema,
+  flow(
+    ({ method, pathname }) => (
+      <Layout>
+        <h1>
+          Home ({method} {pathname})
+        </h1>
+      </Layout>
+    ),
+    Response.react,
+    Effect.succeed,
+  ),
+);
