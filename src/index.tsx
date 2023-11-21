@@ -1,8 +1,8 @@
 import { Schema } from "@effect/schema";
 import * as React from "react";
 
-import { form } from "./form";
-import { link } from "./link";
+import { make } from "./Form";
+import { make } from "./Link";
 
 const Doc = ({ children }: React.PropsWithChildren) => (
   <html>
@@ -29,7 +29,7 @@ const getHome = Schema.struct({
   body: Schema.any,
 });
 
-export const HomeLink = link(getHome);
+export const HomeLink = make(getHome);
 
 export const HomePage = () => (
   <Doc>
@@ -45,7 +45,7 @@ const getSignUp = Schema.struct({
   body: Schema.any,
 });
 
-export const SignUpLink = link(getSignUp);
+export const SignUpLink = make(getSignUp);
 
 const postSignUp = Schema.struct({
   method: Schema.literal("POST"),
@@ -59,7 +59,7 @@ const postSignUp = Schema.struct({
   }),
 });
 
-export const SignUpForm = form(postSignUp);
+export const SignUpForm = make(postSignUp);
 
 export const SignUpPage = () => (
   <Doc>

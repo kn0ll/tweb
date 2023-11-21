@@ -9,7 +9,7 @@ type HTTPLink<L extends Location> = "GET" extends L["method"]
     }
   : never;
 
-export const link =
+export const make =
   <L extends Location, P extends HTTPLink<L>>(
     _schema: "GET" extends P["method"] ? Schema.Schema<P> : never,
   ) =>

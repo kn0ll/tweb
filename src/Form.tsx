@@ -8,7 +8,7 @@ type HTTPForm<L extends Location> = L & {
 };
 
 // if method is get, accept search config. if method is other, accept body config
-export const form =
+export const make =
   <L extends Location, Form extends HTTPForm<L>>(
     _schema: Schema.Schema<Form>,
   ) =>

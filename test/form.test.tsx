@@ -2,9 +2,9 @@ import { Schema } from "@effect/schema";
 import test from "ava";
 import * as React from "react";
 
-import { form } from "../src/form";
+import { make } from "../src/Form";
 
-const UpdateProfileForm = form(
+const UpdateProfileForm = make(
   Schema.struct({
     method: Schema.literal("PUT"),
     path: Schema.literal("/profile"),
