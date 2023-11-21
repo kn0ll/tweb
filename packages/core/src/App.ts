@@ -1,5 +1,6 @@
 import type { Default } from "@effect/platform/Http/App";
-import type { Route } from "./Route.js";
+import type { Location } from "./HTTP.js";
+import type { Router } from "./Router.js";
 
 import * as ServerRequest from "@effect/platform/Http/ServerRequest";
 import * as ServerResponse from "@effect/platform/Http/ServerResponse";
@@ -15,10 +16,11 @@ import {
 } from "effect";
 import querystring from "node:querystring";
 
-export const make = <R, E>(
-  routes: readonly Route<R, E, any>[],
+// TODO: i think we're losing `R` here which is important :o
+export const make = <R, E, A extends Location>(
+  router: Router<R, E, any>,
 ): Default<R, E> => {
-  const matchers = ReadonlyArray.map(routes, ([aa, bb]) =>
+  const matchers = ReadonlyArray.map(router, ([aa, bb]) =>
     Match.when(Schema.is(pipe(aa, Schema.omit("hash"))), bb),
   ) as [
     <I, F, A, Pr>(
