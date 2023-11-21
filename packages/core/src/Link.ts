@@ -1,7 +1,7 @@
 import type { Schema } from "@effect/schema";
 import type { Hash, Location } from "./HTTP.js";
 
-import { flow, pipe } from "effect";
+import { flow } from "effect";
 
 import * as DOMElement from "./DOMElement.js";
 
