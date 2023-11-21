@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { HomePageLink } from "./routes/HomePage.js";
-import { SignUpLink } from "./routes/SignUpPage.js";
+import { SignUpPageLink } from "./routes/SignUpPage.js";
 
 export const Layout = ({ children }: React.PropsWithChildren) => (
   <html>
@@ -15,9 +15,9 @@ export const Layout = ({ children }: React.PropsWithChildren) => (
         <nav>
           <ul>
             <li>
-              <SignUpLink pathname="/sign-up" hash={null} search={null}>
+              <SignUpPageLink pathname="/sign-up" hash={null} search={null}>
                 Sign Up
-              </SignUpLink>
+              </SignUpPageLink>
             </li>
           </ul>
         </nav>

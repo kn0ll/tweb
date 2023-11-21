@@ -14,7 +14,7 @@ export const homePageSchema = Schema.struct({
 
 export const HomePageLink = Link.make(homePageSchema);
 
-export default Route.make(
+export const homePageRoute = Route.make(
   homePageSchema,
   flow(
     ({ method, pathname }) => (

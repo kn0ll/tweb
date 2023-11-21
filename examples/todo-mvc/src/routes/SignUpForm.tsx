@@ -17,6 +17,6 @@ export const signUpFormSchema = Schema.struct({
 export const SignUpForm = Form.make(signUpFormSchema);
 
 // TODO: need to parse body...
-export default Route.make(signUpFormSchema, () =>
+export const signUpFormRoute = Route.make(signUpFormSchema, () =>
   pipe("Sign Up Form", ServerResponse.text, Effect.succeed),
 );

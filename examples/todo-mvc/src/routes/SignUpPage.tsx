@@ -13,9 +13,9 @@ export const signUpPageSchema = Schema.struct({
   hash: Schema.null,
 });
 
-export const SignUpLink = Link.make(signUpPageSchema);
+export const SignUpPageLink = Link.make(signUpPageSchema);
 
-export default Route.make(
+export const signUpPageRoute = Route.make(
   signUpPageSchema,
   flow(
     () => (
