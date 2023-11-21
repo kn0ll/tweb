@@ -1,7 +1,7 @@
 import { Schema } from "@effect/schema";
 import { Effect, flow } from "effect";
 import * as React from "react";
-import { Link, Response, Route } from "tweb";
+import { DOMElement, Link, Route } from "tweb";
 
 import { Layout } from "../Layout.js";
 import { SignUpForm } from "./SignUpForm.js";
@@ -39,7 +39,7 @@ export const signUpPageRoute = Route.make(
         </SignUpForm>
       </Layout>
     ),
-    Response.react,
+    DOMElement.serverResponse,
     Effect.succeed,
   ),
 );

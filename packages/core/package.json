@@ -4,12 +4,11 @@
   "type": "module",
   "exports": {
     ".": "./lib/src/index.js",
+    "./DOMElement": "./lib/src/DOMElement.js",
     "./Form": "./lib/src/Form.js",
     "./HTTP": "./lib/src/HTTP.js",
     "./Link": "./lib/src/Link.js",
     "./Route": "./lib/src/Route.js",
-    "./Response": "./lib/src/Response.js",
-    "./Router": "./lib/src/Router.js",
     "./Server": "./lib/src/Server.js"
   },
   "scripts": {

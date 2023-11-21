@@ -2,7 +2,6 @@ import type { Schema } from "@effect/schema";
 import type { Location } from "./HTTP.js";
 
 import { flow } from "effect";
-import * as React from "react";
 
 import * as DOMElement from "./DOMElement.js";
 
@@ -48,9 +47,9 @@ export type FormProps<F extends FormLocation<Location>> = Omit<F, "body"> & {
 /**
  * @category components
  */
-export const FormInput = <F extends FormLocation<Location>>(
+export const FormInput: <F extends FormLocation<Location>>(
   props: FormInputProps<F>,
-) => <input {...props} />;
+) => JSX.Element = DOMElement.make("input");
 
 /**
  * TODO: if method is get, accept search config. if method is other, accept body config

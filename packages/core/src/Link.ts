@@ -1,14 +1,22 @@
 import type { Schema } from "@effect/schema";
 import type { Hash, Location } from "./HTTP.js";
 
-import { createElement } from "react";
+import { pipe } from "effect";
 
+import * as DOMElement from "./DOMElement.js";
+
+/**
+ * @category types
+ */
 type HTTPLink<L extends Location> = "GET" extends L["method"]
   ? L & {
       hash: Hash | null;
     }
   : never;
 
+/**
+ * @category constructors
+ */
 export const make =
   <L extends Location, P extends HTTPLink<L>>(
     _schema: "GET" extends P["method"] ? Schema.Schema<P> : never,
@@ -31,8 +39,10 @@ export const make =
       hash: P["hash"];
       search: P["search"];
     }) =>
-    createElement(
-      "a",
-      Object.assign({}, props, { href: [pathname, search, hash].join("") }),
-      children,
+    pipe(
+      Object.assign({}, props, {
+        href: [pathname, search, hash].join(""),
+        children,
+      }),
+      DOMElement.make("a"),
     );
