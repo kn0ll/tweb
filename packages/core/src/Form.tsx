@@ -37,5 +37,10 @@ export const make =
     schema: Schema.Schema<Form>,
   ) =>
   ({ children, ...location }: FormProps<Form>) => (
-    <form method={location.method}>{children(FormInput)}</form>
+    <form
+      action={[location.pathname, location.search].join("")}
+      method={location.method}
+    >
+      {children(FormInput)}
+    </form>
   );
