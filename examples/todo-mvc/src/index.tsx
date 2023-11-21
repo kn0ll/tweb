@@ -95,7 +95,7 @@ const signUpFormSchema = Schema.struct({
 const SignUpForm = Form.make(signUpFormSchema);
 
 // TODO: need to parse body...
-const signUpForm = Route.make(signUpFormSchema, ({ method, pathname, body }) =>
+const signUpForm = Route.make(signUpFormSchema, () =>
   pipe("Sign Up Form", ServerResponse.text, Effect.succeed),
 );
 
