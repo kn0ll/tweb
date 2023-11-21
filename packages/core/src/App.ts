@@ -16,7 +16,10 @@ import {
 } from "effect";
 import querystring from "node:querystring";
 
-// TODO: i think we're losing `R` here which is important :o
+/**
+ * TODO: i think we're losing `R` here which is important :o
+ * @category constructors
+ */
 export const make = <R, E, A extends Location>(
   router: Router<R, E, any>,
 ): Default<R, E> => {
@@ -59,6 +62,8 @@ export const make = <R, E, A extends Location>(
   );
 };
 
+// TODO: "loop through array and break at first" instead of match might give us correct types
+//       maybe its validateFirst or forEach or something though
 // const foo = (routes: Route<unknown, unknown, unknown>[]) => (input: unknown) =>
 //   pipe(
 //     Effect.iterate(
