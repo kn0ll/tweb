@@ -13,6 +13,7 @@
   },
   "files": [],
   "references": [
+    { "path": "./examples/todo-mvc/tsconfig.json" },
     { "path": "./packages/core/tsconfig.json" }
   ]
 }
