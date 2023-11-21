@@ -2,7 +2,7 @@ import { Schema } from "@effect/schema";
 import test from "ava";
 import { pipe } from "effect";
 
-import { make } from "../src/Link";
+import * as Link from "../src/Link";
 
 const linkSchema = Schema.struct({
   pathname: Schema.literal("/profile"),
@@ -12,7 +12,7 @@ const linkSchema = Schema.struct({
 
 test("foo", (t) => {
   t.truthy(
-    make(
+    Link.make(
       pipe(
         linkSchema,
         Schema.extend(Schema.struct({ method: Schema.literal("GET") })),
@@ -23,7 +23,7 @@ test("foo", (t) => {
 
 test("foo2", (t) => {
   t.truthy(
-    make(
+    Link.make(
       pipe(
         linkSchema,
         Schema.extend(
@@ -38,7 +38,7 @@ test("foo2", (t) => {
 
 test("foo3", (t) => {
   t.truthy(
-    make(
+    Link.make(
       // @ts-expect-error: should fail because it's not GET
       pipe(
         linkSchema,

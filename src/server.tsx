@@ -4,11 +4,34 @@ import * as Runtime from "@effect/platform-node/Runtime";
 import { Schema } from "@effect/schema";
 import { Effect, pipe } from "effect";
 import { createServer } from "node:http";
+import * as React from "react";
 
 import * as Form from "./Form";
 import * as Link from "./Link";
 import * as Route from "./Route";
 import * as Router from "./Router";
+
+const Doc = ({ children }: React.PropsWithChildren) => (
+  <html>
+    <body>
+      <header>
+        <h1>
+          <HomePageLink pathname="/" hash={null} search={null}>
+            Home
+          </HomePageLink>
+        </h1>
+        <nav>
+          <ul>
+            <li>
+              <SignUpLink pathname="/sign-up" hash={null} search={null} />
+            </li>
+          </ul>
+        </nav>
+      </header>
+      {children}
+    </body>
+  </html>
+);
 
 const homePageSchema = Schema.struct({
   method: Schema.literal("GET"),
@@ -22,6 +45,14 @@ const HomePageLink = Link.make(homePageSchema);
 const homePage = Route.make(homePageSchema, ({ method, pathname, search }) =>
   pipe("Home Page", ServerResponse.text, Effect.succeed),
 );
+
+/*
+() => (
+  <Doc>
+    <h1>Home</h1>
+  </Doc>
+)
+*/
 
 const signUpPageSchema = Schema.struct({
   method: Schema.literal("GET"),
@@ -37,6 +68,29 @@ const signUpPage = Route.make(
   ({ method, pathname, search }) =>
     pipe("Sign Up", ServerResponse.text, Effect.succeed),
 );
+
+/*
+() => (
+  <Doc>
+    <h1>Sign Up</h1>
+    {/* 1. probably need to accept same props as link. ie method="GET" (we can use this to determine what Input provides, query or body)
+    {/* 2. on that notes, query will need to be set on `action` by us... *
+    <SignUpForm method="POST" pathname="/sign-up" hash={null} search={null}>
+      {(Input) => (
+        <>
+          <label htmlFor="username">Username</label>
+          <Input type="text" name="username" id="username" />
+          <label htmlFor="email">Email</label>
+          <Input type="text" name="email" id="email" />
+          <label htmlFor="password">Password</label>
+          <Input type="password" name="password" id="password" />
+          {/* <Input type="submit" /> 
+        </>
+      )}
+    </SignUpForm>
+  </Doc>
+)
+*/
 
 const signUpFormSchema = Schema.struct({
   method: Schema.literal("POST"),

@@ -1,7 +1,7 @@
 import type { Schema } from "@effect/schema";
 import type { Hash, Location } from "./HTTP";
 
-import * as React from "react";
+import { createElement } from "react";
 
 type HTTPLink<L extends Location> = "GET" extends L["method"]
   ? L & {
@@ -30,8 +30,9 @@ export const make =
       pathname: P["pathname"];
       hash: P["hash"];
       search: P["search"];
-    }) => (
-    <a {...props} href={[pathname, search, hash].join("")}>
-      {children}
-    </a>
-  );
+    }) =>
+    createElement(
+      "a",
+      Object.assign({}, props, { href: [pathname, search, hash].join("") }),
+      children,
+    );
