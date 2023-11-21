@@ -17,8 +17,7 @@
       ]
     }],
     // so we can infer phantom types with arguments instead of awkward generics
-    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": "off",
     // so we can use `unknown` generics in `.tsx` files
     "@typescript-eslint/no-unnecessary-type-constraint": "off"
   }

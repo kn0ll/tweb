@@ -3,37 +3,39 @@ import type { Location } from "./HTTP.js";
 
 import * as React from "react";
 
-type HTTPForm<L extends Location> = L & {
+export type FormLocation<L extends Location> = L & {
   body: unknown | null;
 };
 
+export type FormInputProps<F extends FormLocation<Location>> =
+  React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > & {
+    name: keyof ("GET" extends F["method"] ? F["search"] : F["body"]);
+  };
+
+export type FormInput<F extends FormLocation<Location>> = (
+  props: FormInputProps<F>,
+) => JSX.Element;
+
+export type FormRenderProp<F extends FormLocation<Location>> = (
+  Input: FormInput<F>,
+) => JSX.Element;
+
+export type FormProps<F extends FormLocation<Location>> = Omit<F, "body"> & {
+  children: FormRenderProp<F>;
+};
+
+export const FormInput = <F extends FormLocation<Location>>(
+  props: FormInputProps<F>,
+) => <input {...props} />;
+
 // if method is get, accept search config. if method is other, accept body config
 export const make =
-  <L extends Location, Form extends HTTPForm<L>>(
-    _schema: Schema.Schema<Form>,
+  <L extends Location, Form extends FormLocation<L>>(
+    schema: Schema.Schema<Form>,
   ) =>
-  ({
-    children,
-    ...location
-  }: Omit<Form, "body"> & {
-    children: (
-      _Input: (
-        _props: React.DetailedHTMLProps<
-          React.InputHTMLAttributes<HTMLInputElement>,
-          HTMLInputElement
-        > & {
-          name: keyof ("GET" extends Form["method"]
-            ? Form["search"]
-            : Form["body"]);
-        },
-      ) => JSX.Element,
-    ) => JSX.Element;
-  }) => (
-    <form method={location.method}>
-      {children((props) => (
-        <input {...props} />
-      ))}
-    </form>
+  ({ children, ...location }: FormProps<Form>) => (
+    <form method={location.method}>{children(FormInput)}</form>
   );
-
-<input />;
