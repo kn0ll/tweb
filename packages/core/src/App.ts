@@ -63,8 +63,8 @@ export const requestToLocation = ({
  */
 export const make = <R, E, A extends Location, T>(
   routes: Route.Route<R, E, any, any>[],
-): Default<R, E | RequestError | ParseError[]> => {
-  return pipe(
+): Default<R, E | RequestError | ParseError[]> =>
+  pipe(
     ServerRequest.ServerRequest,
     Effect.flatMap(requestToLocation),
     Effect.flatMap((location) =>
@@ -78,4 +78,3 @@ export const make = <R, E, A extends Location, T>(
     ),
     Effect.flatMap(identity),
   );
-};

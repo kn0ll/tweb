@@ -4,6 +4,9 @@
     ".pnpm-store": true,
     "packages/web/.cache": true
   },
+  "search.exclude": {
+    "packages/core/docs": true
+  },
   "editor.rulers": [80],
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
