@@ -20,10 +20,5 @@ export const DeleteTodoForm = Form.make(deleteTodoFormSchema);
 // TODO: need to parse body (annotate body schema?)...
 export const deleteTodoFormRoute = Route.make(
   deleteTodoFormSchema,
-  ({ body }) =>
-    pipe(
-      DB.del(0),
-      Effect.flatMap(constant(todosPageHandler)),
-      Effect.tapError(Effect.logError),
-    ),
+  ({ body }) => pipe(DB.del(0), Effect.flatMap(constant(todosPageHandler))),
 );

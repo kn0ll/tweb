@@ -45,7 +45,7 @@ export const todosPageHandler = pipe(
   Effect.map(DOMElement.serverResponse),
 );
 
-export const todosPageRoute = Route.make(todosPageSchema, () => {
-  console.log("aaaaaaaaaaa");
-  return todosPageHandler;
-});
+export const todosPageRoute = Route.make(
+  todosPageSchema,
+  constant(todosPageHandler),
+);
