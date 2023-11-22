@@ -1,5 +1,7 @@
 /**
  * High level utilities for creating HTTP servers from `tweb` types.
+ *
+ * @since 1.0.0
  */
 
 import type { ListenOptions } from "node:net";
@@ -16,6 +18,7 @@ import { createServer } from "node:http";
  * But you may consider ejecting from this function when you require
  * more robust scoping, layers, or error handling.
  *
+ * @since 1.0.0
  * @category constructors
  */
 export const make = (options: ListenOptions) =>

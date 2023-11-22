@@ -1,5 +1,6 @@
 {
   "name": "tweb",
+  "homepage": "https://github.com/kn0ll/tweb",
   "version": "1.0.0",
   "type": "module",
   "exports": {
@@ -13,7 +14,7 @@
   },
   "scripts": {
     "test": "c8 -r html ava lib/test",
-    "docs": "docgen"
+    "doc": "docgen"
   },
   "devDependencies": {
     "@effect/docgen": "^0.3.5",

@@ -1,6 +1,8 @@
 /**
  * A `Route` is the core primitive of our HTTP server,
  * and maps specialized `Location` schemas to HTTP handlers.
+ *
+ * @since 1.0.0
  */
 
 import type { ServerResponse } from "@effect/platform/Http/ServerResponse";
@@ -12,6 +14,7 @@ import type { Location } from "./HTTP.js";
  * A `Route` is a pair of  `Location` schema `A`,
  * and a handler which accepts the parsed `A` as an argument.
  *
+ * @since 1.0.0
  * @category types
  */
 export type Route<R, E, A extends Location, T> = readonly [
@@ -25,6 +28,7 @@ export type Route<R, E, A extends Location, T> = readonly [
  * for type inference, passing the resulting `A` from the input schema
  * as an argument to the handler.
  *
+ * @since 1.0.0
  * @category constructors
  */
 export const make = <R, E, A extends Location, T>(
