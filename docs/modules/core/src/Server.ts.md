@@ -1,5 +1,5 @@
 ---
-title: Server.ts
+title: core/src/Server.ts
 nav_order: 8
 parent: Modules
 ---

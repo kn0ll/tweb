@@ -1,5 +1,5 @@
 ---
-title: Route.ts
+title: core/src/Route.ts
 nav_order: 7
 parent: Modules
 ---

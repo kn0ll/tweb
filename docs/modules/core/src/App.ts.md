@@ -1,5 +1,5 @@
 ---
-title: App.ts
+title: core/src/App.ts
 nav_order: 1
 parent: Modules
 ---
@@ -39,9 +39,7 @@ the first route that matches will be the one whose handler executed.
 **Signature**
 
 ```ts
-export declare const make: <R, E, A extends Location, T>(
-  router: Route<R, E, any, any>[]
-) => Default<R, RequestError | E>
+export declare const make: <R, E>(routes: Route.Route<R, E, any, any>[]) => Default<R, RequestError | E | ParseError[]>
 ```
 
 Added in v1.0.0

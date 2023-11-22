@@ -1,5 +1,5 @@
 ---
-title: index.ts
+title: core/src/index.ts
 nav_order: 5
 parent: Modules
 ---

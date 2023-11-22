@@ -1,5 +1,5 @@
 ---
-title: DOMElement.ts
+title: core/src/DOMElement.ts
 nav_order: 2
 parent: Modules
 ---

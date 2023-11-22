@@ -1,5 +1,5 @@
 ---
-title: Link.ts
+title: core/src/Link.ts
 nav_order: 6
 parent: Modules
 ---

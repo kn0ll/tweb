@@ -4,6 +4,7 @@ importers:
 
   .:
     specifiers:
+      '@effect/docgen': ^0.3.5
       '@typescript-eslint/eslint-plugin': ^6.12.0
       '@typescript-eslint/parser': ^6.12.0
       eslint: ^8.53.0
@@ -11,8 +12,10 @@ importers:
       eslint-plugin-prettier: ^5.0.1
       eslint-plugin-simple-import-sort: ^10.0.0
       prettier: ^3.1.0
+      tsx: ^4.2.0
       typescript: ^5.2.2
     devDependencies:
+      '@effect/docgen': 0.3.5_tsx@4.2.0+typescript@5.3.2
       '@typescript-eslint/eslint-plugin': 6.12.0_wnbvn5ztc62p5ue2kz3rdpuw6q
       '@typescript-eslint/parser': 6.12.0_t4y562kuozn2x6kqiutrjmhi5a
       eslint: 8.54.0
@@ -20,6 +23,7 @@ importers:
       eslint-plugin-prettier: 5.0.1_oedvp5mvnqhy2rzk6rnpm5c4sq
       eslint-plugin-simple-import-sort: 10.0.0_eslint@8.54.0
       prettier: 3.1.0
+      tsx: 4.2.0
       typescript: 5.3.2
 
   examples/todo-mvc:

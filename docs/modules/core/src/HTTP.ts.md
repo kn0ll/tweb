@@ -1,5 +1,5 @@
 ---
-title: HTTP.ts
+title: core/src/HTTP.ts
 nav_order: 4
 parent: Modules
 ---
