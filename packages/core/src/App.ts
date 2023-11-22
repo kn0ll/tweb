@@ -8,8 +8,8 @@ import * as ServerResponse from "@effect/platform/Http/ServerResponse";
 import { Schema } from "@effect/schema";
 import {
   Effect,
+  Either,
   flow,
-  identity,
   Match,
   pipe,
   ReadonlyArray,
@@ -26,8 +26,7 @@ export const make = <R, E, A extends Location, T>(
 ): Default<R, E | RequestError> => {
   const matchers = ReadonlyArray.map(router, ([aa, bb]) =>
     Match.when(
-      // TODO: remove body!! it was just for debugging new form!!!
-      Schema.is(pipe(aa, Schema.omit("hash"))),
+      flow(Schema.parseEither(pipe(aa, Schema.omit("hash"))), Either.isRight),
       bb,
     ),
   ) as [
@@ -48,23 +47,13 @@ export const make = <R, E, A extends Location, T>(
       pipe(
         urlParamsBody,
         Effect.flatMap((body) =>
-          pipe(
-            Effect.sync(() =>
-              pipe(url.split("?"), ([pathname, search]) => {
-                console.log("body is", {
-                  method,
-                  pathname: pathname || "",
-                  search: search ? querystring.parse(search) : null,
-                  body: ReadonlyRecord.fromEntries(body),
-                });
-                return {
-                  method,
-                  pathname: pathname || "",
-                  search: search ? querystring.parse(search) : null,
-                  body: ReadonlyRecord.fromEntries(body),
-                };
-              }),
-            ),
+          Effect.sync(() =>
+            pipe(url.split("?"), ([pathname, search]) => ({
+              method,
+              pathname: pathname || "",
+              search: search ? querystring.parse(search) : null,
+              body: ReadonlyRecord.fromEntries(body),
+            })),
           ),
         ),
       ),

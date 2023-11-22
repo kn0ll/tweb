@@ -10,14 +10,13 @@ export const deleteTodoFormSchema = Schema.struct({
   method: Schema.literal("POST"),
   pathname: Schema.literal("/"),
   search: Schema.null,
-  body: Schema.struct({ id: Schema.string }),
+  body: Schema.struct({ id: Schema.NumberFromString }),
 });
 
 export const DeleteTodoForm = Form.make(deleteTodoFormSchema);
 
-// TODO: need to parse body (annotate body schema?)...
 export const deleteTodoFormRoute = Route.make(
   deleteTodoFormSchema,
   ({ body: { id } }) =>
-    pipe(DB.del(parseInt(id)), Effect.flatMap(constant(todosPageHandler))),
+    pipe(DB.del(id), Effect.flatMap(constant(todosPageHandler))),
 );
