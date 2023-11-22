@@ -1,3 +1,9 @@
+/**
+ * TODO: docs
+ *
+ * @since 1.0.0
+ */
+
 import type { Default } from "@effect/platform/Http/App";
 import type { RequestError } from "@effect/platform/Http/ServerError";
 import type { Location } from "./HTTP.js";

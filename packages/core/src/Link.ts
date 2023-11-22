@@ -1,6 +1,6 @@
 /**
- * The `Link` module is responsible for binding `Location` schema instances to anchors.
- * This ensures that all links are type safe.
+ * The `Link` module is responsible for binding `Location` schema instances to
+ * html anchors. This ensures that all links are type safe.
  *
  * @since 1.0.0
  */
@@ -13,15 +13,15 @@ import { flow } from "effect";
 import * as DOMElement from "./DOMElement.js";
 
 /**
- * An `HTTPLink` is a `Location` schema which is constrained to the `GET` method,
- * and an additional `hash` property. The `hash` property is not used during
- * routing, but it can be used to help create type-safe identifiers for
+ * A `LinkLocation` is a `Location` schema which is constrained to the `GET`
+ * method, and an additional `hash` property. The `hash` property is not used
+ * during routing, but it can be used to help create type-safe identifiers for
  * elements.
  *
  * @since 1.0.0
  * @category types
  */
-export type HTTPLink<L extends Location> = "GET" extends L["method"]
+export type LinkLocation<L extends Location> = "GET" extends L["method"]
   ? L & {
       hash: Hash | null;
     }
@@ -54,20 +54,20 @@ export type AnchorProps = React.PropsWithChildren &
  * @since 1.0.0
  * @category types
  */
-export type LinkProps<P extends HTTPLink<Location>> = AnchorProps & {
+export type LinkProps<P extends LinkLocation<Location>> = AnchorProps & {
   pathname: P["pathname"];
   hash: P["hash"];
   search: P["search"];
 };
 
 /**
- * Given some `Location` schema, create a React anchor element whose
- * props are bound to only valid inputs of the schema.
+ * Given some `Location` schema, create an HTML anchor element whose props are
+ * bound to only valid inputs of the schema.
  *
  * @since 1.0.0
  * @category constructors
  */
-export const make = <L extends Location, P extends HTTPLink<L>>(
+export const make = <L extends Location, P extends LinkLocation<L>>(
   schema: "GET" extends P["method"] ? Schema.Schema<P> : never,
 ) =>
   flow(

@@ -1,3 +1,10 @@
+/**
+ * The `Form` module is responsible for binding `Location` schema instances to
+ * html forms. This ensures that all forms are type safe.
+ *
+ * @since 1.0.0
+ */
+
 import type { Schema } from "@effect/schema";
 import type { Location } from "./HTTP.js";
 
@@ -7,6 +14,11 @@ import querystring from "node:querystring";
 import * as DOMElement from "./DOMElement.js";
 
 /**
+ * A `FormLocation` is a `Location` schema which is constrained to the `GET`
+ * method, and an additional `body` property. The `body` property is used
+ * for matching routes, and creating type-safe form inputs.
+ *
+ * @since 1.0.0
  * @category types
  */
 export type FormLocation<L extends Location> = L & {
@@ -14,6 +26,10 @@ export type FormLocation<L extends Location> = L & {
 };
 
 /**
+ * Given some `Location`, create a specialized version of form input props,
+ * which binds input types to the `Location`.
+ *
+ * @since 1.0.0
  * @category types
  */
 export type FormInputProps<F extends FormLocation<Location>> =
@@ -25,6 +41,9 @@ export type FormInputProps<F extends FormLocation<Location>> =
   };
 
 /**
+ * A `FormInput` is a component which accepts `FormInputProps` for some schema.
+ *
+ * @since 1.0.0
  * @category types
  */
 export type FormInput<F extends FormLocation<Location>> = (
@@ -32,6 +51,11 @@ export type FormInput<F extends FormLocation<Location>> = (
 ) => JSX.Element;
 
 /**
+ * `FormRenderProp` defines the signature of the render function accepted
+ * by a `Form` component. It provides an `Input` component, which can
+ * only be invoked with properties specific to some schema.
+ *
+ * @since 1.0.0
  * @category types
  */
 export type FormRenderProp<F extends FormLocation<Location>> = (
@@ -39,6 +63,9 @@ export type FormRenderProp<F extends FormLocation<Location>> = (
 ) => JSX.Element;
 
 /**
+ * The props a `Form` component accepts.
+ *
+ * @since 1.0.0
  * @category types
  */
 export type FormProps<F extends FormLocation<Location>> = Omit<F, "body"> & {
@@ -46,6 +73,9 @@ export type FormProps<F extends FormLocation<Location>> = Omit<F, "body"> & {
 };
 
 /**
+ * Create an `input` element with some `FormInputProps`.
+ *
+ * @since 1.0.0
  * @category components
  */
 export const FormInput: <F extends FormLocation<Location>>(
@@ -53,8 +83,12 @@ export const FormInput: <F extends FormLocation<Location>>(
 ) => JSX.Element = DOMElement.make("input");
 
 /**
- * TODO: if method is get, accept search config. if method is other, accept body config
- * TODO: accept other html props like classname (we do this fine in Link, i just punted this cause of naming conflicts)
+ * Given some `Location` schema, create an HTML form whose props are bound to
+ * only valid inputs of the schema.
+ *
+ * @todo if method is get, accept search config. if method is other, accept body config
+ * @todo accept other html props like classname (we do this fine in Link, i just punted this cause of naming conflicts)
+ * @since 1.0.0
  * @category constructors
  */
 export const make = <L extends Location, Form extends FormLocation<L>, T>(
