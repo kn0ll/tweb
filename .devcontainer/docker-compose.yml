@@ -5,7 +5,7 @@ services:
   dev:
     build:
       context: .
-      dockerfile: ./.devcontainer/Dockerfile
+      dockerfile: ./Dockerfile
     working_dir: /opt/dev
     tty: true
     volumes:

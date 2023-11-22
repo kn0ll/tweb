@@ -1,6 +1,6 @@
 {
   "name": "Dev",
-  "dockerComposeFile": "../docker-compose.yml",
+  "dockerComposeFile": "./docker-compose.yml",
   "service": "dev",
   "workspaceFolder": "/opt/dev",
   "postCreateCommand": "pnpm install --frozen-lockfile && cd docs && bundle install",
