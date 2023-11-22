@@ -1,6 +1,6 @@
 /**
  * A `Route` is the core primitive of our HTTP server,
- * and maps specialized `Location` schemas to HTTP handlers.
+ * and binding `Location` schema instances to HTTP handlers.
  *
  * @since 1.0.0
  */

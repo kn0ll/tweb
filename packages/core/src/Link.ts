@@ -1,3 +1,10 @@
+/**
+ * The `Link` module is responsible for binding `Location` schema instances to anchors.
+ * This ensures that all links are type safe.
+ *
+ * @since 1.0.0
+ */
+
 import type { Schema } from "@effect/schema";
 import type { Hash, Location } from "./HTTP.js";
 
@@ -6,6 +13,12 @@ import { flow } from "effect";
 import * as DOMElement from "./DOMElement.js";
 
 /**
+ * An `HTTPLink` is a `Location` schema which is constrained to the `GET` method,
+ * and an additional `hash` property. The `hash` property is not used during
+ * routing, but it can be used to help create type-safe identifiers for
+ * elements.
+ *
+ * @since 1.0.0
  * @category types
  */
 type HTTPLink<L extends Location> = "GET" extends L["method"]
@@ -15,6 +28,10 @@ type HTTPLink<L extends Location> = "GET" extends L["method"]
   : never;
 
 /**
+ * These are all the props that can be proxied directly to an anchor element.
+ * The `href` property will derived from the given `Location`.
+ *
+ * @since 1.0.0
  * @category types
  */
 type AnchorProps = React.PropsWithChildren &
@@ -27,6 +44,14 @@ type AnchorProps = React.PropsWithChildren &
   >;
 
 /**
+ * `AnchorProps` with an additional `Location` property required to compute
+ * a `href`. The reason we need to explicitly accept things like `pathname`
+ * and we can't derive it from the schema, is because a `Location` schema may
+ * have a `pathname` which is not a static string. For example, if a routes
+ * pathname is the union of two strings, the developer must arbitrate which
+ * pathname we want to use.
+ *
+ * @since 1.0.0
  * @category types
  */
 type LinkProps<P extends HTTPLink<Location>> = AnchorProps & {
@@ -36,6 +61,10 @@ type LinkProps<P extends HTTPLink<Location>> = AnchorProps & {
 };
 
 /**
+ * Given some `Location` schema, create a React anchor element whose
+ * props are bound to only valid inputs of the schema.
+ *
+ * @since 1.0.0
  * @category constructors
  */
 export const make = <L extends Location, P extends HTTPLink<L>>(
