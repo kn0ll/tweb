@@ -1,5 +1,5 @@
 import { Schema } from "@effect/schema";
-import { Effect, flow, pipe } from "effect";
+import { Effect, pipe } from "effect";
 import { constant } from "effect/Function";
 import { Form, Route } from "tweb";
 
@@ -9,7 +9,7 @@ import { todosPageHandler } from "./TodosPage.js";
 export const deleteTodoFormSchema = Schema.struct({
   method: Schema.literal("POST"),
   pathname: Schema.literal("/"),
-  search: Schema.null,
+  search: Schema.struct({ action: Schema.literal("delete") }),
   body: Schema.struct({ id: Schema.NumberFromString }),
 });
 

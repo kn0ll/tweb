@@ -7,7 +7,8 @@ export type Todo = {
 
 const todos: Todo[] = [{ title: "Get Operated On", updatedAt: new Date() }];
 
-export const create = (todo: Todo) => Effect.sync(() => todos.push(todo));
+export const create = (title: string) =>
+  Effect.sync(() => todos.push({ title, updatedAt: new Date() }));
 
 export const read = (idx: number) => Effect.sync(() => todos[idx]);
 

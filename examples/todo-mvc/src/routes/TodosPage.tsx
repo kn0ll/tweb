@@ -6,6 +6,7 @@ import { DOMElement, Link, Route } from "tweb";
 
 import * as DB from "../DB.js";
 import Layout from "../Layout.js";
+import { CreateTodoForm } from "./CreateTodoForm.js";
 import { DeleteTodoForm } from "./DeleteTodoForm.js";
 
 export const TodosPage = ({ todos }: { todos: DB.Todo[] }) => (
@@ -15,7 +16,11 @@ export const TodosPage = ({ todos }: { todos: DB.Todo[] }) => (
       {todos.map(({ title }, idx) => (
         <li key={`${idx}-${title}`}>
           {title}
-          <DeleteTodoForm method="POST" pathname="/" search={null}>
+          <DeleteTodoForm
+            method="POST"
+            pathname="/"
+            search={{ action: "delete" }}
+          >
             {(Input) => (
               <>
                 <Input type="hidden" name="id" value={idx} />
@@ -26,6 +31,14 @@ export const TodosPage = ({ todos }: { todos: DB.Todo[] }) => (
         </li>
       ))}
     </ul>
+    <CreateTodoForm method="POST" pathname="/" search={{ action: "create" }}>
+      {(Input) => (
+        <>
+          <Input type="text" name="title" />
+          <input type="submit" value="Create" />
+        </>
+      )}
+    </CreateTodoForm>
   </Layout>
 );
 
@@ -41,7 +54,7 @@ export const TodosPageLink = Link.make(todosPageSchema);
 export const todosPageHandler = pipe(
   DB.all,
   Effect.map((todos) => ({ todos })),
-  Effect.flatMap(flow(TodosPage, Effect.succeed)),
+  Effect.map(TodosPage),
   Effect.map(DOMElement.serverResponse),
 );
 

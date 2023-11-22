@@ -2,6 +2,7 @@ import type { Schema } from "@effect/schema";
 import type { Location } from "./HTTP.js";
 
 import { flow } from "effect";
+import querystring from "node:querystring";
 
 import * as DOMElement from "./DOMElement.js";
 
@@ -61,7 +62,10 @@ export const make = <L extends Location, Form extends FormLocation<L>, T>(
 ) =>
   flow(
     ({ children, ...location }: FormProps<Form>) => ({
-      action: [location.pathname, location.search].join(""),
+      action: [
+        location.pathname,
+        querystring.encode(location.search || undefined),
+      ].join("?"),
       method: location.method,
       children: children(FormInput),
     }),
