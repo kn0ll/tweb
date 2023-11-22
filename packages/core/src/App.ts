@@ -24,7 +24,26 @@ export const make = <R, E, A extends Location, T>(
   router: Route<R, E, any, any>[],
 ): Default<R, E> => {
   const matchers = ReadonlyArray.map(router, ([aa, bb]) =>
-    Match.when(Schema.is(pipe(aa, Schema.omit("hash"))), bb),
+    Match.when(
+      // TODO: remove body!! it was just for debugging new form!!!
+      (a: any) => {
+        console.log(
+          "matching",
+          Schema.is(pipe(aa, Schema.omit("hash"), Schema.omit("body")))(a),
+          a,
+        );
+        return Schema.is(pipe(aa, Schema.omit("hash"), Schema.omit("body")))(a);
+      },
+      (a) => {
+        console.log("calling bb with a", a);
+        try {
+          return bb(a);
+        } catch (e) {
+          console.log("WTFFFXX", e);
+          throw e;
+        }
+      },
+    ),
   ) as [
     <I, F, A, Pr>(
       _self: Match.Matcher<I, F, unknown, A, Pr>,

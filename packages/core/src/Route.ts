@@ -16,7 +16,7 @@ import type { Location } from "./HTTP.js";
  */
 export type Route<R, E, A extends Location, T> = readonly [
   schema: Schema.Schema<A, T>,
-  handler: (a: A) => Effect.Effect<R, E, ServerResponse>,
+  handler: (a: T) => Effect.Effect<R, E, ServerResponse>,
 ];
 
 /**

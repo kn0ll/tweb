@@ -15,11 +15,11 @@ export const TodosPage = ({ todos }: { todos: DB.Todo[] }) => (
       {todos.map(({ title }, idx) => (
         <li key={`${idx}-${title}`}>
           {title}
-          <DeleteTodoForm method="POST" pathname="/sign-up" search={null}>
+          <DeleteTodoForm method="POST" pathname="/" search={null}>
             {(Input) => (
               <>
                 <Input type="hidden" name="id" />
-                <input type="submit">Delete</input>
+                <input type="submit" value="Delete" />
               </>
             )}
           </DeleteTodoForm>
@@ -38,13 +38,14 @@ export const todosPageSchema = Schema.struct({
 
 export const TodosPageLink = Link.make(todosPageSchema);
 
-export const todosPageRoute = Route.make(
-  todosPageSchema,
-  pipe(
-    DB.all,
-    Effect.map((todos) => ({ todos })),
-    Effect.flatMap(flow(TodosPage, Effect.succeed)),
-    Effect.map(DOMElement.serverResponse),
-    constant,
-  ),
+export const todosPageHandler = pipe(
+  DB.all,
+  Effect.map((todos) => ({ todos })),
+  Effect.flatMap(flow(TodosPage, Effect.succeed)),
+  Effect.map(DOMElement.serverResponse),
 );
+
+export const todosPageRoute = Route.make(todosPageSchema, () => {
+  console.log("aaaaaaaaaaa");
+  return todosPageHandler;
+});
