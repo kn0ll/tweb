@@ -14,8 +14,7 @@
   "scripts": {
     "lint": "eslint src",
     "build": "tsc",
-    "test": "c8 -r html -r text ava lib/test",
-    "doc": "docgen"
+    "test": "c8 -r html -r text ava lib/test"
   },
   "devDependencies": {
     "@effect/platform": "^0.31.0",
