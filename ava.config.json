@@ -1,8 +1,0 @@
-{
-  "typescript": {
-    "rewritePaths": {
-      "src/": "build/"
-    },
-    "compile": false
-  }
-}
