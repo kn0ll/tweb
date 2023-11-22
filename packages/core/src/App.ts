@@ -28,6 +28,32 @@ import {
 import querystring from "node:querystring";
 
 /**
+ * Given a `ServerRequest`, format it as a `Location` suitable for pattern
+ * matching.
+ *
+ * @since 1.0.0
+ * @category lifting
+ */
+export const requestToLocation = ({
+  url,
+  method,
+  urlParamsBody,
+}: ServerRequest.ServerRequest) =>
+  pipe(
+    urlParamsBody,
+    Effect.flatMap((body) =>
+      Effect.sync(() =>
+        pipe(url.split("?"), ([pathname, search]) => ({
+          method,
+          pathname: pathname || "",
+          search: search ? querystring.parse(search) : null,
+          body: ReadonlyRecord.fromEntries(body),
+        })),
+      ),
+    ),
+  );
+
+/**
  * Given a [Route](./Route.ts) list, construct an `@effect/platform` app.
  * This works is by pattern matching the request against the input
  * [Route](./Route.ts) schemas.
@@ -76,32 +102,6 @@ export const make = <R, E, A extends Location, T>(
     ),
   );
 };
-
-/**
- * Given a `ServerRequest`, format it as a `Location` suitable for pattern
- * matching.
- *
- * @since 1.0.0
- * @category lifting
- */
-export const requestToLocation = ({
-  url,
-  method,
-  urlParamsBody,
-}: ServerRequest.ServerRequest) =>
-  pipe(
-    urlParamsBody,
-    Effect.flatMap((body) =>
-      Effect.sync(() =>
-        pipe(url.split("?"), ([pathname, search]) => ({
-          method,
-          pathname: pathname || "",
-          search: search ? querystring.parse(search) : null,
-          body: ReadonlyRecord.fromEntries(body),
-        })),
-      ),
-    ),
-  );
 
 // SCRATCH (FOR MY EYES ONLY): this should probably replace the rats nest above
 // TODO: "loop through array and break at first" instead of match might give us
