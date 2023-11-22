@@ -1,5 +1,6 @@
 # TODO
-- Variable pathnames / matching
+- Variable pathname matching (path params)
+- Method matching (Method.match(() => handleGet, () => handlePost))
 
 # Improvements
 1. Nothing forces you to actually register schemas with the app, so "valid" anchors might not be served
