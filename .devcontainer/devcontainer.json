@@ -3,7 +3,7 @@
   "dockerComposeFile": "../docker-compose.yml",
   "service": "dev",
   "workspaceFolder": "/opt/dev",
-  "postCreateCommand": "pnpm install --frozen-lockfile",
+  "postCreateCommand": "pnpm install --frozen-lockfile && cd docs && bundle install",
   "customizations": {
     "vscode": {
       "extensions": [
