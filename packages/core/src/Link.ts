@@ -21,7 +21,7 @@ import * as DOMElement from "./DOMElement.js";
  * @since 1.0.0
  * @category types
  */
-type HTTPLink<L extends Location> = "GET" extends L["method"]
+export type HTTPLink<L extends Location> = "GET" extends L["method"]
   ? L & {
       hash: Hash | null;
     }
@@ -34,7 +34,7 @@ type HTTPLink<L extends Location> = "GET" extends L["method"]
  * @since 1.0.0
  * @category types
  */
-type AnchorProps = React.PropsWithChildren &
+export type AnchorProps = React.PropsWithChildren &
   Omit<
     React.DetailedHTMLProps<
       React.AnchorHTMLAttributes<HTMLAnchorElement>,
@@ -54,7 +54,7 @@ type AnchorProps = React.PropsWithChildren &
  * @since 1.0.0
  * @category types
  */
-type LinkProps<P extends HTTPLink<Location>> = AnchorProps & {
+export type LinkProps<P extends HTTPLink<Location>> = AnchorProps & {
   pathname: P["pathname"];
   hash: P["hash"];
   search: P["search"];
