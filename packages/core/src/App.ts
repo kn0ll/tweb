@@ -54,14 +54,14 @@ export const requestToLocation = ({
  * One implication of this is that the order of your routes matters:
  * the first route that matches will be the one whose handler executed.
  *
- * @todo remove all type coercion
+ * @todo fix any?
  * @todo probably dont want to attempt to parse url body params on every request
- * @todo this type of matching is probably grossly inefficient
  * @todo i think we're losing `R` and `E` here which is important :o
  * @since 1.0.0
  * @category constructors
  */
 export const make = <R, E>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   routes: Route.Route<R, E, any, any>[],
 ): Default<R, E | RequestError | ParseError[]> =>
   pipe(
