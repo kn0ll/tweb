@@ -8,7 +8,6 @@ import { todosPageRoute } from "../src/routes/TodosPage.js";
 
 pipe(
   App.make([createTodoFormRoute, deleteTodoFormRoute, todosPageRoute]),
-  (x) => x,
   Server.make({ port: 8000 }),
   Runtime.runMain,
 );
