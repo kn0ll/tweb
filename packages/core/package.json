@@ -13,6 +13,8 @@
     "./Server": "./lib/src/Server.js"
   },
   "scripts": {
+    "lint": "eslint src",
+    "build": "tsc",
     "test": "c8 -r html ava lib/test",
     "doc": "docgen"
   },
