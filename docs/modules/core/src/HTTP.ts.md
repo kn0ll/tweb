@@ -1,10 +1,10 @@
 ---
-title: core/lib/src/HTTP.d.ts
+title: core/src/HTTP.ts
 nav_order: 4
 parent: Modules
 ---
 
-## HTTP.d overview
+## HTTP overview
 
 Additional HTTP types.
 
@@ -67,7 +67,7 @@ Added in v1.0.0
 
 ## Search (type alias)
 
-Search values can only primitively be `string` | `string[]`.
+Search values can only primitively be `string | string[]`.
 
 **Signature**
 

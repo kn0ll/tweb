@@ -1,10 +1,10 @@
 ---
-title: core/lib/src/index.d.ts
+title: core/src/index.ts
 nav_order: 5
 parent: Modules
 ---
 
-## index.d overview
+## index overview
 
 A single export for all packages, for those who prefer.
 
