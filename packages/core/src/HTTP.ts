@@ -24,7 +24,7 @@ export type Pathname = `/${string}`;
 export type Hash = `#${string}`;
 
 /**
- * Search values can only primitively be `string` | `string[]`.
+ * Search values can only primitively be `string | string[]`.
  *
  * @since 1.0.0
  * @category types
