@@ -1,10 +1,10 @@
 ---
-title: core/src/HTTP.ts
+title: core/lib/src/HTTP.d.ts
 nav_order: 4
 parent: Modules
 ---
 
-## HTTP overview
+## HTTP.d overview
 
 Additional HTTP types.
 

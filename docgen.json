@@ -1,4 +1,4 @@
 {
   "outDir": "docs",
-  "srcDir": "packages/core/src"
+  "srcDir": "packages/core/lib/src"
 }

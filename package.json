@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "pnpm -r lint",
     "build": "tsc -b",
-    "test": "pnpm --filter tweb test"
+    "test": "pnpm --filter tweb test",
+    "doc": "docgen"
   },
   "devDependencies": {
     "@effect/docgen": "^0.3.5",
