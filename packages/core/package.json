@@ -12,12 +12,14 @@
     "./Server": "./lib/src/Server.js"
   },
   "scripts": {
-    "test": "c8 -r html ava lib/test"
+    "test": "c8 -r html ava lib/test",
+    "docs": "docgen"
   },
   "devDependencies": {
-    "@effect/platform": "^0.30.6",
-    "@effect/platform-node": "^0.31.9",
-    "@effect/schema": "^0.48.4",
+    "@effect/docgen": "^0.3.5",
+    "@effect/platform": "^0.31.0",
+    "@effect/platform-node": "^0.32.0",
+    "@effect/schema": "^0.49.0",
     "@types/node": "^20.9.2",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
@@ -26,12 +28,14 @@
     "effect": "^2.0.0-next.55",
     "fast-check": "^3.13.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tsx": "^4.2.0",
+    "typescript": "^5.2.2"
   },
   "peerDependencies": {
-    "@effect/platform": "^0.30.6",
-    "@effect/platform-node": "^0.31.9",
-    "@effect/schema": "^0.48.4",
+    "@effect/platform": "^0.31.0",
+    "@effect/platform-node": "^0.32.0",
+    "@effect/schema": "^0.49.0",
     "effect": "^2.0.0-next.55",
     "fast-check": "^3.13.2",
     "react": "^18.2.0",
