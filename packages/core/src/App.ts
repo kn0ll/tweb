@@ -1,4 +1,5 @@
 import type { Default } from "@effect/platform/Http/App";
+import type { RequestError } from "@effect/platform/Http/ServerError";
 import type { Location } from "./HTTP.js";
 import type { Route } from "./Route.js";
 
@@ -22,11 +23,11 @@ import querystring from "node:querystring";
  */
 export const make = <R, E, A extends Location, T>(
   router: Route<R, E, any, any>[],
-): Default<R, E> => {
+): Default<R, E | RequestError> => {
   const matchers = ReadonlyArray.map(router, ([aa, bb]) =>
     Match.when(
       // TODO: remove body!! it was just for debugging new form!!!
-      Schema.is(pipe(aa, Schema.omit("hash"), Schema.omit("body"))),
+      Schema.is(pipe(aa, Schema.omit("hash"))),
       bb,
     ),
   ) as [
@@ -43,15 +44,29 @@ export const make = <R, E, A extends Location, T>(
 
   return pipe(
     ServerRequest.ServerRequest,
-    Effect.flatMap(({ url, method }) =>
+    Effect.flatMap(({ url, method, urlParamsBody }) =>
       pipe(
-        Effect.sync(() =>
-          pipe(url.split("?"), ([pathname, search]) => ({
-            pathname: pathname || "",
-            search: search ? querystring.parse(search) : null,
-          })),
+        urlParamsBody,
+        Effect.flatMap((body) =>
+          pipe(
+            Effect.sync(() =>
+              pipe(url.split("?"), ([pathname, search]) => {
+                console.log("body is", {
+                  method,
+                  pathname: pathname || "",
+                  search: search ? querystring.parse(search) : null,
+                  body: ReadonlyRecord.fromEntries(body),
+                });
+                return {
+                  method,
+                  pathname: pathname || "",
+                  search: search ? querystring.parse(search) : null,
+                  body: ReadonlyRecord.fromEntries(body),
+                };
+              }),
+            ),
+          ),
         ),
-        Effect.map(ReadonlyRecord.union({ method }, identity)),
       ),
     ),
     Effect.flatMap(

@@ -18,7 +18,7 @@ export const TodosPage = ({ todos }: { todos: DB.Todo[] }) => (
           <DeleteTodoForm method="POST" pathname="/" search={null}>
             {(Input) => (
               <>
-                <Input type="hidden" name="id" />
+                <Input type="hidden" name="id" value={idx} />
                 <input type="submit" value="Delete" />
               </>
             )}
