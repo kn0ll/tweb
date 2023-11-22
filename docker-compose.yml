@@ -7,30 +7,8 @@ services:
       context: .
       dockerfile: ./.devcontainer/Dockerfile
       args:
-        workdir: ${DEVCONTAINER_WORKDIR}
-    working_dir: ${DEVCONTAINER_WORKDIR}
+        workdir: /opt/dev
+    working_dir: /opt/dev
     tty: true
     volumes:
-      - ./:${DEVCONTAINER_WORKDIR}
-
-  telemetry:
-    image: jaegertracing/all-in-one:latest
-    ports:
-      - "16686:16686"
-      - "4318:4318"
-    environment:
-      - LOG_LEVEL=debug
-
-  db:
-    image: postgres:13.1
-    environment:
-      POSTGRES_USER: ${DBUSER}
-      POSTGRES_PASSWORD: ${DBPASSWORD}
-      POSTGRES_DB: ${DBDATABASE}
-    ports:
-      - 5432:5432
-    volumes:
-      - db-volume:/var/lib/postgresql/data
-
-volumes:
-  db-volume:
+      - ./:/opt/dev
