@@ -57,11 +57,11 @@ export const requestToLocation = ({
  * @todo remove all type coercion
  * @todo probably dont want to attempt to parse url body params on every request
  * @todo this type of matching is probably grossly inefficient
- * @todo i think we're losing `R` here which is important :o
+ * @todo i think we're losing `R` and `E` here which is important :o
  * @since 1.0.0
  * @category constructors
  */
-export const make = <R, E, A extends Location, T>(
+export const make = <R, E>(
   routes: Route.Route<R, E, any, any>[],
 ): Default<R, E | RequestError | ParseError[]> =>
   pipe(
