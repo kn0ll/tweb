@@ -6,8 +6,6 @@ services:
     build:
       context: .
       dockerfile: ./.devcontainer/Dockerfile
-      args:
-        workdir: /opt/dev
     working_dir: /opt/dev
     tty: true
     volumes:
