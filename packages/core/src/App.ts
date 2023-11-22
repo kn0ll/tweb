@@ -11,21 +11,14 @@
 import type { Default } from "@effect/platform/Http/App";
 import type { RequestError } from "@effect/platform/Http/ServerError";
 import type { Location } from "./HTTP.js";
-import type { Route } from "./Route.js";
 
 import * as ServerRequest from "@effect/platform/Http/ServerRequest";
-import * as ServerResponse from "@effect/platform/Http/ServerResponse";
 import { Schema } from "@effect/schema";
-import {
-  Effect,
-  Either,
-  flow,
-  Match,
-  pipe,
-  ReadonlyArray,
-  ReadonlyRecord,
-} from "effect";
+import { ParseError } from "@effect/schema/ParseResult";
+import { Effect, identity, pipe, ReadonlyRecord } from "effect";
 import querystring from "node:querystring";
+
+import * as Route from "./Route.js";
 
 /**
  * Given a `ServerRequest`, format it as a `Location` suitable for pattern
@@ -69,69 +62,20 @@ export const requestToLocation = ({
  * @category constructors
  */
 export const make = <R, E, A extends Location, T>(
-  router: Route<R, E, any, any>[],
-): Default<R, E | RequestError> => {
-  const matchers = ReadonlyArray.map(router, ([aa, bb]) =>
-    Match.when(
-      flow(Schema.parseEither(pipe(aa, Schema.omit("hash"))), Either.isRight),
-      bb,
-    ),
-  ) as [
-    <I, F, A, Pr>(
-      _self: Match.Matcher<I, F, unknown, A, Pr>,
-    ) => Match.Matcher<
-      I,
-      Match.Types.AddWithout<F, any>,
-      Match.Types.ApplyFilters<I, Match.Types.AddWithout<F, any>>,
-      Effect.Effect<R, E, ServerResponse.ServerResponse> | A,
-      Pr
-    >,
-  ];
-
+  routes: Route.Route<R, E, any, any>[],
+): Default<R, E | RequestError | ParseError[]> => {
   return pipe(
     ServerRequest.ServerRequest,
     Effect.flatMap(requestToLocation),
-    Effect.flatMap(
-      flow(
-        Match.value,
-        ...matchers,
-        Match.orElse(() =>
-          Effect.succeed(ServerResponse.empty({ status: 404 })),
+    Effect.flatMap((location) =>
+      Effect.validateFirst(routes, ([schema, handler]) =>
+        pipe(
+          location,
+          Schema.parse(pipe(schema, Schema.omit("hash"))),
+          Effect.map(handler),
         ),
       ),
     ),
+    Effect.flatMap(identity),
   );
 };
-
-// SCRATCH (FOR MY EYES ONLY): this should probably replace the rats nest above
-// TODO: "loop through array and break at first" instead of match might give us
-//       correct types maybe its validateFirst or forEach or something though
-// const foo = (routes: Route<unknown, unknown, unknown>[]) => (input: unknown) =>
-//   pipe(
-//     Effect.iterate(
-//       { routes, result: Option.none<ServerResponse.ServerResponse>() },
-//       {
-//         while: ({ routes, result }) =>
-//           ReadonlyArray.isEmptyArray(routes) && Option.isNone(result),
-//         body: ({ routes, result }) =>
-//           pipe(
-//             routes,
-//             ReadonlyArray.head,
-//             Effect.flatMap(([schema, handler]) =>
-//               pipe(
-//                 input,
-//                 Schema.parse(schema),
-//                 Effect.catchAll(() =>
-//                   pipe(routes, ReadonlyArray.tail, (routes) =>
-//                     Effect.succeed({ routes, result }),
-//                   ),
-//                 ),
-//                 Effect.flatMap(handler),
-//               ),
-//             ),
-//             () => Effect.succeed({ routes, result }),
-//           ),
-//       },
-//     ),
-//     Effect.map(({ result }) => result),
-//   );
