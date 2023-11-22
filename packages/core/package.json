@@ -15,7 +15,7 @@
   "scripts": {
     "lint": "eslint src",
     "build": "tsc",
-    "test": "c8 -r html ava lib/test",
+    "test": "c8 -r html -r text ava lib/test",
     "doc": "docgen"
   },
   "devDependencies": {
