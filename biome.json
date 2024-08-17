@@ -1,5 +1,11 @@
 {
 	"files": {
-		"ignore": [".pnpm-store", "**/node_modules", "**/lib", "docs/modules"]
+		"ignore": [
+			".pnpm-store",
+			"**/coverage",
+			"**/node_modules",
+			"**/lib",
+			"**/docs"
+		]
 	}
 }
