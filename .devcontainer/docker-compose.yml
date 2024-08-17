@@ -4,9 +4,9 @@ services:
 
   dev:
     build:
-      context: .
-      dockerfile: ./Dockerfile
+      context: ..
+      dockerfile: ./.devcontainer/Dockerfile
     working_dir: /opt/dev
     tty: true
     volumes:
-      - ./:/opt/dev
+      - ../:/opt/dev

@@ -20,9 +20,9 @@ import { renderToString } from "react-dom/server";
  * @category constructors
  */
 export const make =
-  <P extends DOMAttributes<T>, T extends Element>(type: string) =>
-  (props?: (ClassAttributes<T> & P) | null) =>
-    createElement(type, props);
+	<P extends DOMAttributes<T>, T extends Element>(type: string) =>
+	(props?: (ClassAttributes<T> & P) | null) =>
+		createElement(type, props);
 
 /**
  * An alias for `ReactDOM.renderToString`. Kind of useless, but emulates the
@@ -40,7 +40,7 @@ export const string = renderToString;
  * @category lifting
  */
 export const serverResponse = flow(
-  string,
-  raw,
-  setHeader("Content-Type", "text/html"),
+	string,
+	raw,
+	setHeader("Content-Type", "text/html"),
 );

@@ -1,24 +1,19 @@
 {
-  "name": "@tweb/dev",
-  "homepage": "https://github.com/kn0ll/tweb",
-  "private": true,
-  "version": "1.0.0",
-  "scripts": {
-    "lint": "pnpm -r lint",
-    "build": "tsc -b",
-    "test": "pnpm --filter tweb test",
-    "doc": "docgen"
-  },
-  "devDependencies": {
-    "@effect/docgen": "^0.3.5",
-    "@typescript-eslint/eslint-plugin": "^6.12.0",
-    "@typescript-eslint/parser": "^6.12.0",
-    "eslint": "^8.53.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.1",
-    "eslint-plugin-simple-import-sort": "^10.0.0",
-    "prettier": "^3.1.0",
-    "tsx": "^4.2.0",
-    "typescript": "^5.2.2"
-  }
+	"name": "@tweb/dev",
+	"homepage": "https://github.com/kn0ll/tweb",
+	"private": true,
+	"version": "1.0.0",
+	"scripts": {
+		"check": "biome check",
+		"build": "tsc -b",
+		"watch": "tsc -w",
+		"test": "pnpm --filter tweb test",
+		"doc": "docgen"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.8.3",
+		"@effect/docgen": "^0.3.5",
+		"tsx": "^4.2.0",
+		"typescript": "^5.2.2"
+	}
 }

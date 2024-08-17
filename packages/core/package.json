@@ -1,43 +1,41 @@
 {
-  "name": "tweb",
-  "version": "1.0.0",
-  "type": "module",
-  "exports": {
-    ".": "./lib/src/index.js",
-    "./DOMElement": "./lib/src/DOMElement.js",
-    "./Form": "./lib/src/Form.js",
-    "./HTTP": "./lib/src/HTTP.js",
-    "./Link": "./lib/src/Link.js",
-    "./Route": "./lib/src/Route.js",
-    "./Server": "./lib/src/Server.js"
-  },
-  "scripts": {
-    "lint": "eslint src",
-    "build": "tsc",
-    "test": "c8 -r html -r text ava lib/test"
-  },
-  "devDependencies": {
-    "@effect/platform": "^0.31.0",
-    "@effect/platform-node": "^0.32.0",
-    "@effect/schema": "^0.49.0",
-    "@types/node": "^20.9.2",
-    "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
-    "ava": "^5.3.1",
-    "c8": "^8.0.1",
-    "effect": "^2.0.0-next.55",
-    "fast-check": "^3.13.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "typescript": "^5.2.2"
-  },
-  "peerDependencies": {
-    "@effect/platform": "^0.31.0",
-    "@effect/platform-node": "^0.32.0",
-    "@effect/schema": "^0.49.0",
-    "effect": "^2.0.0-next.55",
-    "fast-check": "^3.13.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  }
+	"name": "tweb",
+	"version": "1.0.0",
+	"type": "module",
+	"exports": {
+		".": "./lib/src/index.js",
+		"./DOMElement": "./lib/src/DOMElement.js",
+		"./Form": "./lib/src/Form.js",
+		"./HTTP": "./lib/src/HTTP.js",
+		"./Link": "./lib/src/Link.js",
+		"./Route": "./lib/src/Route.js",
+		"./Server": "./lib/src/Server.js"
+	},
+	"scripts": {
+		"test": "c8 -r html -r text ava lib/test"
+	},
+	"devDependencies": {
+		"@effect/platform": "^0.31.0",
+		"@effect/platform-node": "^0.32.0",
+		"@effect/schema": "^0.49.0",
+		"@types/node": "^20.9.2",
+		"@types/react": "^18.2.37",
+		"@types/react-dom": "^18.2.15",
+		"ava": "^5.3.1",
+		"c8": "^8.0.1",
+		"effect": "^2.0.0-next.55",
+		"fast-check": "^3.13.2",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"typescript": "^5.2.2"
+	},
+	"peerDependencies": {
+		"@effect/platform": "^0.31.0",
+		"@effect/platform-node": "^0.32.0",
+		"@effect/schema": "^0.49.0",
+		"effect": "^2.0.0-next.55",
+		"fast-check": "^3.13.2",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
+	}
 }

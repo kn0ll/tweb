@@ -9,7 +9,6 @@ import type { Schema } from "@effect/schema";
 import type { Hash, Location } from "./HTTP.js";
 
 import { flow } from "effect";
-
 import * as DOMElement from "./DOMElement.js";
 
 /**
@@ -22,10 +21,10 @@ import * as DOMElement from "./DOMElement.js";
  * @category types
  */
 export type LinkLocation<L extends Location> = "GET" extends L["method"]
-  ? L & {
-      hash: Hash | null;
-    }
-  : never;
+	? L & {
+			hash: Hash | null;
+		}
+	: never;
 
 /**
  * These are all the props that can be proxied directly to an anchor element.
@@ -35,13 +34,13 @@ export type LinkLocation<L extends Location> = "GET" extends L["method"]
  * @category types
  */
 export type AnchorProps = React.PropsWithChildren &
-  Omit<
-    React.DetailedHTMLProps<
-      React.AnchorHTMLAttributes<HTMLAnchorElement>,
-      HTMLAnchorElement
-    >,
-    "href"
-  >;
+	Omit<
+		React.DetailedHTMLProps<
+			React.AnchorHTMLAttributes<HTMLAnchorElement>,
+			HTMLAnchorElement
+		>,
+		"href"
+	>;
 
 /**
  * `AnchorProps` with an additional `Location` property required to compute
@@ -55,9 +54,9 @@ export type AnchorProps = React.PropsWithChildren &
  * @category types
  */
 export type LinkProps<P extends LinkLocation<Location>> = AnchorProps & {
-  pathname: P["pathname"];
-  hash: P["hash"];
-  search: P["search"];
+	pathname: P["pathname"];
+	hash: P["hash"];
+	search: P["search"];
 };
 
 /**
@@ -68,13 +67,13 @@ export type LinkProps<P extends LinkLocation<Location>> = AnchorProps & {
  * @category constructors
  */
 export const make = <L extends Location, P extends LinkLocation<L>>(
-  schema: "GET" extends P["method"] ? Schema.Schema<P> : never,
+	schema: "GET" extends P["method"] ? Schema.Schema<P> : never,
 ) =>
-  flow(
-    ({ pathname, hash, search, children, ...props }: LinkProps<P>) =>
-      Object.assign({}, props, {
-        href: [pathname, search, hash].join(""),
-        children,
-      }),
-    DOMElement.make("a"),
-  );
+	flow(
+		({ pathname, hash, search, children, ...props }: LinkProps<P>) =>
+			Object.assign({}, props, {
+				href: [pathname, search, hash].join(""),
+				children,
+			}),
+		DOMElement.make("a"),
+	);

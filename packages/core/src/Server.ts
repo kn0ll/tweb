@@ -6,9 +6,9 @@
 
 import type { ListenOptions } from "node:net";
 
+import { createServer } from "node:http";
 import { server } from "@effect/platform-node/HttpServer";
 import { Effect, flow } from "effect";
-import { createServer } from "node:http";
 
 /**
  * Given an `App` and a server configuration,
@@ -22,10 +22,10 @@ import { createServer } from "node:http";
  * @category constructors
  */
 export const make = (options: ListenOptions) =>
-  flow(
-    server.serve(),
-    Effect.scoped,
-    Effect.provide(server.layer(createServer, options)),
-    Effect.catchAllCause(Effect.logError),
-    Effect.withSpan("Server.make"),
-  );
+	flow(
+		server.serve(),
+		Effect.scoped,
+		Effect.provide(server.layer(createServer, options)),
+		Effect.catchAllCause(Effect.logError),
+		Effect.withSpan("Server.make"),
+	);

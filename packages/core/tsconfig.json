@@ -1,9 +1,9 @@
 {
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "composite": true,
-    "jsx": "react",
-    "outDir": "lib"
-  },
-  "include": ["src", "test"]
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"composite": true,
+		"jsx": "react",
+		"outDir": "lib"
+	},
+	"include": ["src", "test"]
 }

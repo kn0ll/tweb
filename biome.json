@@ -1,0 +1,5 @@
+{
+	"files": {
+		"ignore": [".pnpm-store", "**/node_modules", "**/lib", "docs/modules"]
+	}
+}

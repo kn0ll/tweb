@@ -10,15 +10,13 @@
 
 import type { Default } from "@effect/platform/Http/App";
 import type { RequestError } from "@effect/platform/Http/ServerError";
-import type { Location } from "./HTTP.js";
+import type { ParseError } from "@effect/schema/ParseResult";
+import type * as Route from "./Route.js";
 
+import querystring from "node:querystring";
 import * as ServerRequest from "@effect/platform/Http/ServerRequest";
 import { Schema } from "@effect/schema";
-import { ParseError } from "@effect/schema/ParseResult";
-import { Effect, identity, pipe, ReadonlyRecord } from "effect";
-import querystring from "node:querystring";
-
-import * as Route from "./Route.js";
+import { Effect, ReadonlyRecord, identity, pipe } from "effect";
 
 /**
  * Given a `ServerRequest`, format it as a `Location` suitable for pattern
@@ -28,23 +26,23 @@ import * as Route from "./Route.js";
  * @category lifting
  */
 export const requestToLocation = ({
-  url,
-  method,
-  urlParamsBody,
+	url,
+	method,
+	urlParamsBody,
 }: ServerRequest.ServerRequest) =>
-  pipe(
-    urlParamsBody,
-    Effect.flatMap((body) =>
-      Effect.sync(() =>
-        pipe(url.split("?"), ([pathname, search]) => ({
-          method,
-          pathname: pathname || "",
-          search: search ? querystring.parse(search) : null,
-          body: ReadonlyRecord.fromEntries(body),
-        })),
-      ),
-    ),
-  );
+	pipe(
+		urlParamsBody,
+		Effect.flatMap((body) =>
+			Effect.sync(() =>
+				pipe(url.split("?"), ([pathname, search]) => ({
+					method,
+					pathname: pathname || "",
+					search: search ? querystring.parse(search) : null,
+					body: ReadonlyRecord.fromEntries(body),
+				})),
+			),
+		),
+	);
 
 /**
  * Given a [Route](./Route.ts) list, construct an `@effect/platform` app.
@@ -61,20 +59,20 @@ export const requestToLocation = ({
  * @category constructors
  */
 export const make = <R, E>(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  routes: Route.Route<R, E, any, any>[],
+	// biome-ignore lint/suspicious/noExplicitAny: TODO
+	routes: Route.Route<R, E, any, any>[],
 ): Default<R, E | RequestError | ParseError[]> =>
-  pipe(
-    ServerRequest.ServerRequest,
-    Effect.flatMap(requestToLocation),
-    Effect.flatMap((location) =>
-      Effect.validateFirst(routes, ([schema, handler]) =>
-        pipe(
-          location,
-          Schema.parse(pipe(schema, Schema.omit("hash"))),
-          Effect.map(handler),
-        ),
-      ),
-    ),
-    Effect.flatMap(identity),
-  );
+	pipe(
+		ServerRequest.ServerRequest,
+		Effect.flatMap(requestToLocation),
+		Effect.flatMap((location) =>
+			Effect.validateFirst(routes, ([schema, handler]) =>
+				pipe(
+					location,
+					Schema.parse(pipe(schema, Schema.omit("hash"))),
+					Effect.map(handler),
+				),
+			),
+		),
+		Effect.flatMap(identity),
+	);

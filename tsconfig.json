@@ -1,19 +1,19 @@
 {
-  "compilerOptions": {
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "target": "ESNext",
-    "declaration": true,
-    "noEmitOnError": true,
-    "sourceMap": true,
-    "incremental": true
-  },
-  "files": [],
-  "references": [
-    { "path": "./examples/todo-mvc/tsconfig.json" },
-    { "path": "./packages/core/tsconfig.json" }
-  ]
+	"compilerOptions": {
+		"strict": true,
+		"noUncheckedIndexedAccess": true,
+		"forceConsistentCasingInFileNames": true,
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"target": "ESNext",
+		"declaration": true,
+		"noEmitOnError": true,
+		"sourceMap": true,
+		"incremental": true
+	},
+	"files": [],
+	"references": [
+		{ "path": "./examples/todo-mvc/tsconfig.json" },
+		{ "path": "./packages/core/tsconfig.json" }
+	]
 }

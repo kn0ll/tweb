@@ -8,9 +8,8 @@
 import type { Schema } from "@effect/schema";
 import type { Location } from "./HTTP.js";
 
-import { flow } from "effect";
 import querystring from "node:querystring";
-
+import { flow } from "effect";
 import * as DOMElement from "./DOMElement.js";
 
 /**
@@ -22,7 +21,7 @@ import * as DOMElement from "./DOMElement.js";
  * @category types
  */
 export type FormLocation<L extends Location> = L & {
-  body: unknown | null;
+	body: unknown | null;
 };
 
 /**
@@ -33,12 +32,12 @@ export type FormLocation<L extends Location> = L & {
  * @category types
  */
 export type FormInputProps<F extends FormLocation<Location>> =
-  React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  > & {
-    name: keyof ("GET" extends F["method"] ? F["search"] : F["body"]);
-  };
+	React.DetailedHTMLProps<
+		React.InputHTMLAttributes<HTMLInputElement>,
+		HTMLInputElement
+	> & {
+		name: keyof ("GET" extends F["method"] ? F["search"] : F["body"]);
+	};
 
 /**
  * A `FormInput` is a component which accepts `FormInputProps` for some schema.
@@ -47,7 +46,7 @@ export type FormInputProps<F extends FormLocation<Location>> =
  * @category types
  */
 export type FormInput<F extends FormLocation<Location>> = (
-  props: FormInputProps<F>,
+	props: FormInputProps<F>,
 ) => JSX.Element;
 
 /**
@@ -59,7 +58,7 @@ export type FormInput<F extends FormLocation<Location>> = (
  * @category types
  */
 export type FormRenderProp<F extends FormLocation<Location>> = (
-  Input: FormInput<F>,
+	Input: FormInput<F>,
 ) => JSX.Element;
 
 /**
@@ -69,7 +68,7 @@ export type FormRenderProp<F extends FormLocation<Location>> = (
  * @category types
  */
 export type FormProps<F extends FormLocation<Location>> = Omit<F, "body"> & {
-  children: FormRenderProp<F>;
+	children: FormRenderProp<F>;
 };
 
 /**
@@ -79,7 +78,7 @@ export type FormProps<F extends FormLocation<Location>> = Omit<F, "body"> & {
  * @category components
  */
 export const FormInput: <F extends FormLocation<Location>>(
-  props: FormInputProps<F>,
+	props: FormInputProps<F>,
 ) => JSX.Element = DOMElement.make("input");
 
 /**
@@ -92,16 +91,16 @@ export const FormInput: <F extends FormLocation<Location>>(
  * @category constructors
  */
 export const make = <L extends Location, Form extends FormLocation<L>, T>(
-  schema: Schema.Schema<Form, T>,
+	schema: Schema.Schema<Form, T>,
 ) =>
-  flow(
-    ({ children, ...location }: FormProps<Form>) => ({
-      action: [
-        location.pathname,
-        querystring.encode(location.search || undefined),
-      ].join("?"),
-      method: location.method,
-      children: children(FormInput),
-    }),
-    DOMElement.make("form"),
-  );
+	flow(
+		({ children, ...location }: FormProps<Form>) => ({
+			action: [
+				location.pathname,
+				querystring.encode(location.search || undefined),
+			].join("?"),
+			method: location.method,
+			children: children(FormInput),
+		}),
+		DOMElement.make("form"),
+	);

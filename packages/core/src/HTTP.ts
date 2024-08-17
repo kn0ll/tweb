@@ -39,7 +39,7 @@ export type Search = ReadonlyRecord.ReadonlyRecord<string | string[]>;
  * @category types
  */
 export type Location = {
-  method: Method;
-  pathname: Pathname;
-  search: Search | null;
+	method: Method;
+	pathname: Pathname;
+	search: Search | null;
 };

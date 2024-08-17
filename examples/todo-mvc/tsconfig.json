@@ -1,11 +1,9 @@
 {
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "jsx": "react",
-    "outDir": "lib"
-  },
-  "include": ["src", "bin"],
-  "references": [
-    { "path": "../../packages/core/tsconfig.json" }
-  ]
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"jsx": "react",
+		"outDir": "lib"
+	},
+	"include": ["src", "bin"],
+	"references": [{ "path": "../../packages/core/tsconfig.json" }]
 }
