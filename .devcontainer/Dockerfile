@@ -1,8 +1,9 @@
-FROM node:18
+FROM node:22
 
 RUN apt-get update
+RUN npm install -g pnpm@9.7.1
+
 RUN apt-get install -y vim ruby-dev
 RUN gem install bundler
-RUN npm install -g pnpm@7.25.0
 
 COPY . .

@@ -1,9 +1,10 @@
-remote_theme: mikearnaldi/just-the-docs
-
-# Enable or disable the site search
+remote_theme: just-the-docs/just-the-docs
+plugins:
+  - jekyll-remote-theme
+defaults:
+  - values:
+      layout: 'default'
 search_enabled: true
-
-# Aux links for the upper right navigation
 aux_links:
-'@tweb/dev on GitHub':
-  - 'https://github.com/kn0ll/tweb'
+  "GitHub":
+    - "https://github.com/kn0ll/tweb"
