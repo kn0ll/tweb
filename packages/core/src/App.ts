@@ -5,7 +5,7 @@
  * This app satisfies the same type, but is constructed using a `tweb`
  * [Route](./Route.ts) list.
  *
- * @since 1.0.0
+ * @since 0.0.1
  */
 
 import type { HttpApp, HttpServerError } from "@effect/platform";
@@ -20,7 +20,7 @@ import { Effect, Record, pipe } from "effect";
  * Given a `ServerRequest`, format it as a `Location` suitable for pattern
  * matching.
  *
- * @since 1.0.0
+ * @since 0.0.1
  * @category lifting
  */
 export const requestToLocation = ({
@@ -53,7 +53,7 @@ export const requestToLocation = ({
  * @todo fix any?
  * @todo probably dont want to attempt to parse url body params on every request
  * @todo i think we're losing `R` and `E` here which is important :o
- * @since 1.0.0
+ * @since 0.0.1
  * @category constructors
  */
 export const make = <E, R>(

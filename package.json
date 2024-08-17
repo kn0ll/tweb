@@ -2,7 +2,7 @@
 	"name": "@tweb/dev",
 	"homepage": "https://github.com/kn0ll/tweb",
 	"private": true,
-	"version": "1.0.0",
+	"version": "0.0.1",
 	"scripts": {
 		"check": "biome check",
 		"build": "tsc -b",

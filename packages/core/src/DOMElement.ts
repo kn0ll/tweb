@@ -2,7 +2,7 @@
  * Methods for interacting with JSX elements. Ideally this module would provide
  * a DOM service, so that we can abstract the React implementation details.
  *
- * @since 1.0.0
+ * @since 0.0.1
  */
 
 import type { ClassAttributes, DOMAttributes } from "react";
@@ -16,7 +16,7 @@ import { renderToString } from "react-dom/server";
  * A functional wrapper for `React.createElement`.
  *
  * @todo i think we're losing `R` here which is important :o
- * @since 1.0.0
+ * @since 0.0.1
  * @category constructors
  */
 export const make =
@@ -28,7 +28,7 @@ export const make =
  * An alias for `ReactDOM.renderToString`. Kind of useless, but emulates the
  * DOM service API we should be providing.
  *
- * @since 1.0.0
+ * @since 0.0.1
  * @category lifting
  */
 export const string = renderToString;
@@ -36,7 +36,7 @@ export const string = renderToString;
 /**
  * Given some JSX element, create a `ServerResponse` for it's HTML.
  *
- * @since 1.0.0
+ * @since 0.0.1
  * @category lifting
  */
 export const serverResponse = flow(

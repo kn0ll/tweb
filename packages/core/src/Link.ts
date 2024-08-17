@@ -2,7 +2,7 @@
  * The `Link` module is responsible for binding `Location` schema instances to
  * html anchors. This ensures that all links are type safe.
  *
- * @since 1.0.0
+ * @since 0.0.1
  */
 
 import type { Schema } from "@effect/schema";
@@ -17,7 +17,7 @@ import * as DOMElement from "./DOMElement.js";
  * during routing, but it can be used to help create type-safe identifiers for
  * elements.
  *
- * @since 1.0.0
+ * @since 0.0.1
  * @category types
  */
 export type LinkLocation<L extends Location> = "GET" extends L["method"]
@@ -30,7 +30,7 @@ export type LinkLocation<L extends Location> = "GET" extends L["method"]
  * These are all the props that can be proxied directly to an anchor element.
  * The `href` property will derived from the given `Location`.
  *
- * @since 1.0.0
+ * @since 0.0.1
  * @category types
  */
 export type AnchorProps = React.PropsWithChildren &
@@ -50,7 +50,7 @@ export type AnchorProps = React.PropsWithChildren &
  * pathname is the union of two strings, the developer must arbitrate which
  * pathname we want to use.
  *
- * @since 1.0.0
+ * @since 0.0.1
  * @category types
  */
 export type LinkProps<P extends LinkLocation<Location>> = AnchorProps & {
@@ -63,7 +63,7 @@ export type LinkProps<P extends LinkLocation<Location>> = AnchorProps & {
  * Given some `Location` schema, create an HTML anchor element whose props are
  * bound to only valid inputs of the schema.
  *
- * @since 1.0.0
+ * @since 0.0.1
  * @category constructors
  */
 export const make = <L extends Location, P extends LinkLocation<L>>(

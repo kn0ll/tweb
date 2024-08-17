@@ -1,6 +1,6 @@
 {
 	"name": "@tweb/example-todo-mvc",
-	"version": "1.0.0",
+	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
 		"dev": "tsx bin/server"

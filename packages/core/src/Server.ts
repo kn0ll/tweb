@@ -1,7 +1,7 @@
 /**
  * High level utilities for creating HTTP servers from `tweb` types.
  *
- * @since 1.0.0
+ * @since 0.0.1
  */
 
 import type { ListenOptions } from "node:net";
@@ -20,7 +20,7 @@ import { Effect, Layer, pipe } from "effect";
  * But you may consider ejecting from this function when you require
  * more robust scoping, layers, or error handling.
  *
- * @since 1.0.0
+ * @since 0.0.1
  * @category constructors
  */
 export const make =
