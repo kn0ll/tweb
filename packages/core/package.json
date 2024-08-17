@@ -13,7 +13,7 @@
 		"./Server": "./lib/src/Server.js"
 	},
 	"scripts": {
-		"doc": "docgen",
+		"docgen": "docgen",
 		"test": "c8 -r html -r text ava lib/test"
 	},
 	"devDependencies": {

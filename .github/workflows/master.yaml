@@ -19,7 +19,7 @@ jobs:
       - run: pnpm check
       - run: pnpm build
       - run: pnpm test
-      - run: pnpm doc
+      - run: pnpm docgen
       - uses: actions/configure-pages@v5
       - uses: actions/jekyll-build-pages@v1
         with:

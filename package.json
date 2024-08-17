@@ -7,7 +7,8 @@
 		"check": "biome check",
 		"build": "tsc -b",
 		"watch": "tsc -w",
-		"test": "pnpm --filter tweb test"
+		"test": "pnpm -r --parallel test",
+		"docgen": "pnpm -r --parallel docgen"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.8.3",
