@@ -2,6 +2,7 @@
 	"name": "tweb",
 	"version": "1.0.0",
 	"type": "module",
+	"homepage": "https://kn0ll.github.io/tweb",
 	"exports": {
 		".": "./lib/src/index.js",
 		"./DOMElement": "./lib/src/DOMElement.js",
@@ -12,9 +13,11 @@
 		"./Server": "./lib/src/Server.js"
 	},
 	"scripts": {
+		"doc": "docgen",
 		"test": "c8 -r html -r text ava lib/test"
 	},
 	"devDependencies": {
+		"@effect/docgen": "^0.3.5",
 		"@effect/platform": "^0.62.0",
 		"@effect/platform-node": "^0.57.0",
 		"@effect/schema": "^0.71.0",

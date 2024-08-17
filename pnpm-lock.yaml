@@ -11,9 +11,6 @@ importers:
       '@biomejs/biome':
         specifier: ^1.8.3
         version: 1.8.3
-      '@effect/docgen':
-        specifier: ^0.3.5
-        version: 0.3.8(tsx@4.17.0)(typescript@5.5.4)
       tsx:
         specifier: ^4.2.0
         version: 4.17.0
@@ -60,6 +57,9 @@ importers:
 
   packages/core:
     devDependencies:
+      '@effect/docgen':
+        specifier: ^0.3.5
+        version: 0.3.8(tsx@4.17.0)(typescript@5.5.4)
       '@effect/platform':
         specifier: ^0.62.0
         version: 0.62.0(@effect/schema@0.71.0(effect@3.6.4))(effect@3.6.4)

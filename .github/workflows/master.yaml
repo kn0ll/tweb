@@ -23,7 +23,7 @@ jobs:
       - uses: actions/configure-pages@v5
       - uses: actions/jekyll-build-pages@v1
         with:
-          source: ./docs
+          source: ./packages/core/docs
       - uses: actions/upload-pages-artifact@v3
       - uses: actions/upload-artifact@v4
         with:
