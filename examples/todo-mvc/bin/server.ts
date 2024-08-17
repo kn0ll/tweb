@@ -6,7 +6,7 @@ import { deleteTodoFormRoute } from "../src/routes/DeleteTodoForm.js";
 import { todosPageRoute } from "../src/routes/TodosPage.js";
 
 pipe(
-	App.make([createTodoFormRoute, deleteTodoFormRoute, todosPageRoute]),
+	App.make([todosPageRoute, deleteTodoFormRoute, createTodoFormRoute]),
 	Server.make({ port: 8000 }),
 	NodeRuntime.runMain,
 );
