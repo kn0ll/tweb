@@ -8,15 +8,13 @@
  * @since 1.0.0
  */
 
-import type { Default } from "@effect/platform/Http/App";
-import type { RequestError } from "@effect/platform/Http/ServerError";
-import type { ParseError } from "@effect/schema/ParseResult";
+import type { HttpApp, HttpServerError } from "@effect/platform";
 import type * as Route from "./Route.js";
 
 import querystring from "node:querystring";
-import * as ServerRequest from "@effect/platform/Http/ServerRequest";
+import { HttpServerRequest } from "@effect/platform";
 import { Schema } from "@effect/schema";
-import { Effect, ReadonlyRecord, identity, pipe } from "effect";
+import { Effect, Record, pipe } from "effect";
 
 /**
  * Given a `ServerRequest`, format it as a `Location` suitable for pattern
@@ -29,7 +27,7 @@ export const requestToLocation = ({
 	url,
 	method,
 	urlParamsBody,
-}: ServerRequest.ServerRequest) =>
+}: HttpServerRequest.HttpServerRequest) =>
 	pipe(
 		urlParamsBody,
 		Effect.flatMap((body) =>
@@ -38,7 +36,7 @@ export const requestToLocation = ({
 					method,
 					pathname: pathname || "",
 					search: search ? querystring.parse(search) : null,
-					body: ReadonlyRecord.fromEntries(body),
+					body: Record.fromEntries(body),
 				})),
 			),
 		),
@@ -58,21 +56,20 @@ export const requestToLocation = ({
  * @since 1.0.0
  * @category constructors
  */
-export const make = <R, E>(
+export const make = <E, R>(
 	// biome-ignore lint/suspicious/noExplicitAny: TODO
-	routes: Route.Route<R, E, any, any>[],
-): Default<R, E | RequestError | ParseError[]> =>
+	routes: Route.Route<any, E, R, any>[],
+): HttpApp.Default<E[] | HttpServerError.RequestError, R> =>
 	pipe(
-		ServerRequest.ServerRequest,
+		HttpServerRequest.HttpServerRequest,
 		Effect.flatMap(requestToLocation),
 		Effect.flatMap((location) =>
 			Effect.validateFirst(routes, ([schema, handler]) =>
 				pipe(
 					location,
-					Schema.parse(pipe(schema, Schema.omit("hash"))),
-					Effect.map(handler),
+					Schema.decode(pipe(schema, Schema.omit("hash"))),
+					handler,
 				),
 			),
 		),
-		Effect.flatMap(identity),
 	);

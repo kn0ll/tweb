@@ -41,11 +41,11 @@ export const TodosPage = ({ todos }: { todos: DB.Todo[] }) => (
 	</Layout>
 );
 
-export const todosPageSchema = Schema.struct({
-	method: Schema.literal("GET"),
-	pathname: Schema.literal("/"),
-	search: Schema.null,
-	hash: Schema.null,
+export const todosPageSchema = Schema.Struct({
+	method: Schema.Literal("GET"),
+	pathname: Schema.Literal("/"),
+	search: Schema.Null,
+	hash: Schema.Null,
 });
 
 export const TodosPageLink = Link.make(todosPageSchema);

@@ -4,8 +4,8 @@
  * @since 1.0.0
  */
 
-import type { Method } from "@effect/platform/Http/Method";
-import type { ReadonlyRecord } from "effect";
+import type { HttpMethod } from "@effect/platform";
+import type { Record } from "effect";
 
 /**
  * A pathname must begin with `/`.
@@ -29,7 +29,7 @@ export type Hash = `#${string}`;
  * @since 1.0.0
  * @category types
  */
-export type Search = ReadonlyRecord.ReadonlyRecord<string | string[]>;
+export type Search = Readonly<Record<string, string | string[]>>;
 
 /**
  * The core type for type-safe routing. Schemas that satisfy the `Location`
@@ -39,7 +39,7 @@ export type Search = ReadonlyRecord.ReadonlyRecord<string | string[]>;
  * @category types
  */
 export type Location = {
-	method: Method;
+	method: HttpMethod.HttpMethod;
 	pathname: Pathname;
 	search: Search | null;
 };

@@ -5,17 +5,17 @@ import { Form, Route } from "tweb";
 import * as DB from "../DB.js";
 import { todosPageHandler } from "./TodosPage.js";
 
-export const createTodoFormSchema = Schema.struct({
-	method: Schema.literal("POST"),
-	pathname: Schema.literal("/"),
-	search: Schema.struct({ action: Schema.literal("create") }),
-	body: Schema.struct({ title: Schema.string }),
+export const CreateTodoFormSchema = Schema.Struct({
+	method: Schema.Literal("POST"),
+	pathname: Schema.Literal("/"),
+	search: Schema.Struct({ action: Schema.Literal("create") }),
+	body: Schema.Struct({ title: Schema.String }),
 });
 
-export const CreateTodoForm = Form.make(createTodoFormSchema);
+export const CreateTodoForm = Form.make(CreateTodoFormSchema);
 
 export const createTodoFormRoute = Route.make(
-	createTodoFormSchema,
+	CreateTodoFormSchema,
 	({ body: { title } }) =>
 		pipe(DB.create(title), Effect.flatMap(constant(todosPageHandler))),
 );

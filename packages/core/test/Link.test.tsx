@@ -4,10 +4,10 @@ import { pipe } from "effect";
 
 import * as Link from "../src/Link.js";
 
-const linkSchema = Schema.struct({
-	pathname: Schema.literal("/profile"),
-	hash: Schema.union(Schema.null, Schema.literal("#description")),
-	search: Schema.struct({ username: Schema.string }),
+const linkSchema = Schema.Struct({
+	pathname: Schema.Literal("/profile"),
+	hash: Schema.NullOr(Schema.Literal("#description")),
+	search: Schema.Struct({ username: Schema.String }),
 });
 
 test("foo", (t) => {
@@ -15,7 +15,7 @@ test("foo", (t) => {
 		Link.make(
 			pipe(
 				linkSchema,
-				Schema.extend(Schema.struct({ method: Schema.literal("GET") })),
+				Schema.extend(Schema.Struct({ method: Schema.Literal("GET") })),
 			),
 		),
 	);
@@ -27,8 +27,8 @@ test("foo2", (t) => {
 			pipe(
 				linkSchema,
 				Schema.extend(
-					Schema.struct({
-						method: Schema.union(Schema.literal("GET"), Schema.literal("POST")),
+					Schema.Struct({
+						method: Schema.Union(Schema.Literal("GET"), Schema.Literal("POST")),
 					}),
 				),
 			),
@@ -43,8 +43,8 @@ test("foo3", (t) => {
 			pipe(
 				linkSchema,
 				Schema.extend(
-					Schema.struct({
-						method: Schema.literal("POST"),
+					Schema.Struct({
+						method: Schema.Literal("POST"),
 					}),
 				),
 			),

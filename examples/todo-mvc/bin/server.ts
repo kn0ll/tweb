@@ -1,4 +1,4 @@
-import { Runtime } from "@effect/platform-node";
+import { NodeRuntime } from "@effect/platform-node";
 import { pipe } from "effect";
 import { App, Server } from "tweb";
 import { createTodoFormRoute } from "../src/routes/CreateTodoForm.js";
@@ -8,5 +8,5 @@ import { todosPageRoute } from "../src/routes/TodosPage.js";
 pipe(
 	App.make([createTodoFormRoute, deleteTodoFormRoute, todosPageRoute]),
 	Server.make({ port: 8000 }),
-	Runtime.runMain,
+	NodeRuntime.runMain,
 );

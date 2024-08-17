@@ -5,7 +5,7 @@
  * @since 1.0.0
  */
 
-import type { ServerResponse } from "@effect/platform/Http/ServerResponse";
+import type { HttpServerResponse } from "@effect/platform";
 import type { Schema } from "@effect/schema";
 import type { Effect } from "effect";
 import type { Location } from "./HTTP.js";
@@ -17,9 +17,9 @@ import type { Location } from "./HTTP.js";
  * @since 1.0.0
  * @category types
  */
-export type Route<R, E, A extends Location, T> = readonly [
-	schema: Schema.Schema<A, T>,
-	handler: (a: T) => Effect.Effect<R, E, ServerResponse>,
+export type Route<A extends Location, E, R, T> = readonly [
+	schema: Schema.Schema<T, A>,
+	handler: (a: T) => Effect.Effect<HttpServerResponse.HttpServerResponse, E, R>,
 ];
 
 /**
@@ -31,6 +31,6 @@ export type Route<R, E, A extends Location, T> = readonly [
  * @since 1.0.0
  * @category constructors
  */
-export const make = <R, E, A extends Location, T>(
-	...route: Route<R, E, A, T>
+export const make = <A extends Location, E, R, T>(
+	...route: Route<A, E, R, T>
 ) => route;

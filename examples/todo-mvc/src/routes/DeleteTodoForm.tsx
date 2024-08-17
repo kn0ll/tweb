@@ -5,11 +5,11 @@ import { Form, Route } from "tweb";
 import * as DB from "../DB.js";
 import { todosPageHandler } from "./TodosPage.js";
 
-export const deleteTodoFormSchema = Schema.struct({
-	method: Schema.literal("POST"),
-	pathname: Schema.literal("/"),
-	search: Schema.struct({ action: Schema.literal("delete") }),
-	body: Schema.struct({ id: Schema.NumberFromString }),
+export const deleteTodoFormSchema = Schema.Struct({
+	method: Schema.Literal("POST"),
+	pathname: Schema.Literal("/"),
+	search: Schema.Struct({ action: Schema.Literal("delete") }),
+	body: Schema.Struct({ id: Schema.NumberFromString }),
 });
 
 export const DeleteTodoForm = Form.make(deleteTodoFormSchema);

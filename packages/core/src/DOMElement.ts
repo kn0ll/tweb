@@ -7,7 +7,7 @@
 
 import type { ClassAttributes, DOMAttributes } from "react";
 
-import { raw, setHeader } from "@effect/platform/Http/ServerResponse";
+import { HttpServerResponse } from "@effect/platform";
 import { flow } from "effect";
 import { createElement } from "react";
 import { renderToString } from "react-dom/server";
@@ -41,6 +41,6 @@ export const string = renderToString;
  */
 export const serverResponse = flow(
 	string,
-	raw,
-	setHeader("Content-Type", "text/html"),
+	HttpServerResponse.raw,
+	HttpServerResponse.setHeader("Content-Type", "text/html"),
 );

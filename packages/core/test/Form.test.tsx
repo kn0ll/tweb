@@ -4,17 +4,17 @@ import * as React from "react";
 
 import * as Form from "../src/Form.js";
 
-const updateProfileSchema = Schema.struct({
-	method: Schema.literal("PUT"),
-	pathname: Schema.literal("/profile"),
-	search: Schema.struct({ id: Schema.string }),
-	body: Schema.struct({
-		username: Schema.string,
-		description: Schema.string,
+const UpdateProfileSchema = Schema.Struct({
+	method: Schema.Literal("PUT"),
+	pathname: Schema.Literal("/profile"),
+	search: Schema.Struct({ id: Schema.String }),
+	body: Schema.Struct({
+		username: Schema.String,
+		description: Schema.String,
 	}),
 });
 
-const UpdateProfileForm = Form.make(updateProfileSchema);
+const UpdateProfileForm = Form.make(UpdateProfileSchema);
 
 test("foo", (t) => {
 	t.truthy(
