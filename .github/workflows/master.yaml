@@ -22,6 +22,8 @@ jobs:
       - run: pnpm doc
       - uses: actions/configure-pages@v5
       - uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./docs
       - uses: actions/upload-pages-artifact@v3
       - uses: actions/upload-artifact@v3
         with:
