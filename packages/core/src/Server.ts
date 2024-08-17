@@ -1,5 +1,5 @@
 /**
- * High level utilities for creating HTTP servers from `tweb` types.
+ * High level utilities for creating HTTP servers from `a-web` types.
  *
  * @since 0.0.1
  */

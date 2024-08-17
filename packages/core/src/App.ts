@@ -2,7 +2,7 @@
  * An `@effect/platform` app is a type extending
  * `Effect.Effect<ServerRequest, E, ServerResponse>`.
  *
- * This app satisfies the same type, but is constructed using a `tweb`
+ * This app satisfies the same type, but is constructed using a `a-web`
  * [Route](./Route.ts) list.
  *
  * @since 0.0.1

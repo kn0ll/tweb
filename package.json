@@ -1,6 +1,6 @@
 {
-	"name": "@tweb/dev",
-	"homepage": "https://github.com/kn0ll/tweb",
+	"name": "@a-web/dev",
+	"homepage": "https://github.com/kn0ll/a-web",
 	"private": true,
 	"version": "0.0.1",
 	"scripts": {

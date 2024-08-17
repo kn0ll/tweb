@@ -1,8 +1,8 @@
 {
-	"name": "tweb",
+	"name": "a-web",
 	"version": "0.0.1",
 	"type": "module",
-	"homepage": "https://kn0ll.github.io/tweb",
+	"homepage": "https://kn0ll.github.io/a-web",
 	"exports": {
 		".": "./lib/src/index.js",
 		"./DOMElement": "./lib/src/DOMElement.js",
