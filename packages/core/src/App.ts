@@ -68,7 +68,7 @@ export const make = <E, R>(
 				pipe(
 					location,
 					Schema.decode(pipe(schema, Schema.omit("hash"))),
-					handler,
+					Effect.flatMap(handler),
 				),
 			),
 		),
