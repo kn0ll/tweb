@@ -5,10 +5,12 @@
  */
 
 import type { ListenOptions } from "node:net";
+import type { HttpApp } from "@effect/platform";
 
 import { createServer } from "node:http";
-import { server } from "@effect/platform-node/HttpServer";
-import { Effect, flow } from "effect";
+import { HttpServer } from "@effect/platform";
+import { NodeHttpServer } from "@effect/platform-node";
+import { Effect, Layer, pipe } from "effect";
 
 /**
  * Given an `App` and a server configuration,
@@ -21,11 +23,12 @@ import { Effect, flow } from "effect";
  * @since 1.0.0
  * @category constructors
  */
-export const make = (options: ListenOptions) =>
-	flow(
-		server.serve(),
-		Effect.scoped,
-		Effect.provide(server.layer(createServer, options)),
-		Effect.catchAllCause(Effect.logError),
-		Effect.withSpan("Server.make"),
-	);
+export const make =
+	(options: ListenOptions) =>
+	<E, R>(httpApp: HttpApp.Default<E, R>) =>
+		pipe(
+			HttpServer.serve(httpApp),
+			Layer.provide(NodeHttpServer.layer(createServer, options)),
+			Layer.launch,
+			Effect.catchAllCause(Effect.logError),
+		);

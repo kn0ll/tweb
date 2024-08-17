@@ -17,9 +17,9 @@ import type { Location } from "./HTTP.js";
  * @since 1.0.0
  * @category types
  */
-export type Route<A extends Location, E, R, T> = readonly [
-	schema: Schema.Schema<T, A>,
-	handler: (a: T) => Effect.Effect<HttpServerResponse.HttpServerResponse, E, R>,
+export type Route<A, E, R, I extends Location> = readonly [
+	schema: Schema.Schema<A, I>,
+	handler: (a: A) => Effect.Effect<HttpServerResponse.HttpServerResponse, E, R>,
 ];
 
 /**
@@ -31,6 +31,6 @@ export type Route<A extends Location, E, R, T> = readonly [
  * @since 1.0.0
  * @category constructors
  */
-export const make = <A extends Location, E, R, T>(
-	...route: Route<A, E, R, T>
+export const make = <A, E, R, I extends Location>(
+	...route: Route<A, E, R, I>
 ) => route;

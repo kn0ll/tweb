@@ -59,7 +59,7 @@ export const requestToLocation = ({
 export const make = <E, R>(
 	// biome-ignore lint/suspicious/noExplicitAny: TODO
 	routes: Route.Route<any, E, R, any>[],
-): HttpApp.Default<E[] | HttpServerError.RequestError, R> =>
+) =>
 	pipe(
 		HttpServerRequest.HttpServerRequest,
 		Effect.flatMap(requestToLocation),
